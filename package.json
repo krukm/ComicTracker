@@ -12,9 +12,10 @@
     "@next/font": "^14.0.4",
     "@types/md5": "^2.3.5",
     "md5": "^2.3.0",
-    "next": "14.0.4",
+    "next": "^14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-icons": "^4.12.0"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -30,11 +30,11 @@ export default async function Page({ params }: { params: { id: number } }) {
   const seriesIssues: SeriesIssueDataWrapper = await getSeriesIssues(params.id)
 
   return (
-    <main className="grid grid-cols-6">
+    <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
       {seriesIssues.results.map((issue, index) => {
         return (
-          <div className="justify-self-center p-4">
-            <Link key={index} href={`/issue/${issue.id}`}>
+          <div className="justify-self-center p-4" key={index}>
+            <Link href={`/issue/${issue.id}`}>
               <Image
                 className="outline"
                 src={issue.image ? issue.image : ''}
@@ -50,9 +50,12 @@ export default async function Page({ params }: { params: { id: number } }) {
             <div>
               #{issue.number}: {toUSDate(issue.cover_date)}
             </div>
+            <div>
+              <button type="button">add to collection</button>
+            </div>
           </div>
         )
       })}
-    </main>
+    </div>
   )
 }

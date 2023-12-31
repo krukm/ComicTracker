@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: { name: string } }) {
     .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())
 
   return (
-    <main>
+    <div>
       <div className="py-5 text-center text-5xl">
         {series.results.length} series found for {formattedName}
       </div>
@@ -60,6 +60,6 @@ export default async function Page({ params }: { params: { name: string } }) {
             )
           })}
       </div>
-    </main>
+    </div>
   )
 }

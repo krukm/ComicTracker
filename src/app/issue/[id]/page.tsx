@@ -27,26 +27,58 @@ async function getIssue(id: number) {
 export default async function Page({ params }: { params: { id: number } }) {
   const issue: Issue = await getIssue(params.id)
 
+  const getVariantCovers = (): string[] => {
+    const covers: string[] = []
+    if (issue.variants.length > 0) {
+      issue.variants.forEach((variant) => {
+        covers.push(variant.image)
+      })
+    }
+    return covers
+  }
+
   return (
-    <main className="w-2/3 m-auto bg-">
-      <div className="w-1/3 m-auto pb-16">
-        <div className="text-3xl py-5">
+    <div className="w-2/3 m-auto bg-blend-color">
+      <div className="pb-16">
+        <div className="text-center text-3xl py-5">
           {issue.series.name} #{issue.number}
         </div>
-        <Image
-          className="outline"
-          src={issue.image ? issue.image : ''}
-          alt={
-            issue.image
-              ? `image of ${issue.series.name} number ${issue.number}`
-              : ''
-          }
-          height={500}
-          width={300}
-        ></Image>
+        <div className="flex justify-center">
+          <Image
+            className="outline-double flex-shrink-0 pr-2"
+            src={issue.image ? issue.image : ''}
+            alt={
+              issue.image
+                ? `image of ${issue.series.name} number ${issue.number}`
+                : ''
+            }
+            height={350}
+            width={175}
+          ></Image>
+          {issue.variants.length > 0 ? (
+            getVariantCovers().map((variant) => {
+              return (
+                <Image
+                  className="outline flex-shrink-0 px-2"
+                  key={Math.random() * 10}
+                  src={variant}
+                  alt={
+                    variant
+                      ? `image of ${issue.series.name} number ${issue.number} variant cover`
+                      : ''
+                  }
+                  height={350}
+                  width={175}
+                ></Image>
+              )
+            })
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
       <div className="text-3xl">{issue.name}</div>
       <div className="pt-2.5">{issue.desc}</div>
-    </main>
+    </div>
   )
 }

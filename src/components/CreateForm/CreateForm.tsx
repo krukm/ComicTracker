@@ -18,8 +18,10 @@ export default function CreateFrom() {
   }
 
   return (
-    <div className="max-w-lg m-auto pt-48">
-      <label className="text-3xl">Search for a series by name:</label>
+    <div className="px-5 md:px-0 max-w-lg m-auto pt-48">
+      <label className="text-1xl md:text-3xl">
+        Search for a series by name:
+      </label>
       <div className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <svg
