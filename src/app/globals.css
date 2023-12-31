@@ -1,13 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.series-list {
-    display: flex;
-    flex-direction: column;
-}
-
-.series-item {
-    align-self: flex-start;
-    padding: 5px;
-}

@@ -1,11 +1,11 @@
 export interface Series {
-    id: string,
-    series: string,
-    yearBegan: number,
-    issueCount: number,
-    modified: string
+  id: number
+  series: string
+  year_began: number
+  issue_count: number
+  modified: string
 }
 
 export interface SeriesDataWrapper {
-    results: Series[]
+  results: Series[]
 }
