@@ -6,11 +6,13 @@
     "dev-server": "next dev",
     "build": "next build",
     "lint": "next lint",
-    "prettier": "prettier --write --ignore-path .gitignore ."
+    "prettier": "prettier --write --ignore-path .gitignore .",
+    "seed": "node -r dotenv/config ./scripts/seed.js"
   },
   "dependencies": {
     "@next/font": "^14.0.4",
     "@types/md5": "^2.3.5",
+    "@vercel/postgres": "^0.5.1",
     "md5": "^2.3.0",
     "next": "^14.0.4",
     "react": "^18",
