@@ -1,5 +1,5 @@
 export interface SeriesIssue {
-  id: string
+  id: number
   series: {
     name: string
     volume: number

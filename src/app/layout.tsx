@@ -4,7 +4,7 @@ import NavBar from '@/components/Navbar/Navbar'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Marvel Comic Tracker',
+  title: 'Comic Tracker',
   description: 'Log your collection',
 }
 

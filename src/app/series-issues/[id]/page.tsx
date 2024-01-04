@@ -31,9 +31,9 @@ export default async function Page({ params }: { params: { id: number } }) {
 
   return (
     <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-      {seriesIssues.results.map((issue, index) => {
+      {seriesIssues.results.map((issue) => {
         return (
-          <div className="justify-self-center p-4" key={index}>
+          <div className="justify-self-center p-4" key={issue.id}>
             <Link href={`/issue/${issue.id}`}>
               <Image
                 className="outline"
@@ -47,12 +47,19 @@ export default async function Page({ params }: { params: { id: number } }) {
                 width={200}
               ></Image>
             </Link>
-            <div>
+            <div className="text-center">
               #{issue.number}: {toUSDate(issue.cover_date)}
             </div>
-            <div>
-              <button type="button">add to collection</button>
-            </div>
+            <Link
+              className="bg-transparent text-center text-nowrap text-blue-900 font-semibold"
+              href={`/api/add-collection?issue_id=${issue.id}&issue_number=${
+                issue.number
+              }&issue_name=${issue.issue.replace('#', '%23')}&cover_date=${
+                issue.cover_date
+              }&series_name=${issue.series.name}&series_id=${params.id}`}
+            >
+              add to collection
+            </Link>
           </div>
         )
       })}

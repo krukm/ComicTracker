@@ -1,10 +1,11 @@
-import CreateFrom from '@/components/CreateForm/CreateForm'
+import FilterBar from '@/components/Textbox/Filter'
+import SearchBar from '@/components/Textbox/Search'
 
 export default async function Home() {
   return (
     <main>
       <div>
-        <CreateFrom />
+        <SearchBar />
       </div>
     </main>
   )
