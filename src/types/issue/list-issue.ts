@@ -1,4 +1,4 @@
-import { SeriesVolume } from './sub-types/series-vol'
+import { SeriesVolume } from '../sub-types/series-vol'
 
 export interface ListIssue {
   id: number

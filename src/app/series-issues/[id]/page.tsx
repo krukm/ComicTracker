@@ -1,4 +1,4 @@
-import { SeriesIssueDataWrapper } from '@/types/series-issue'
+import { SeriesIssueDataWrapper } from '@/types/series/series-issue'
 import Link from 'next/link'
 import Image from 'next/image'
 import { toUSDate } from '@/utils/dates'

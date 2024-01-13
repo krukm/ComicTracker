@@ -6,7 +6,8 @@
     "dev-server": "next dev",
     "build": "next build",
     "lint": "next lint",
-    "prettier": "prettier --write --ignore-path .gitignore ."
+    "prettier": "prettier --write --ignore-path .gitignore .",
+    "start": "next start"
   },
   "dependencies": {
     "@types/md5": "^2.3.5",

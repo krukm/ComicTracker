@@ -1,4 +1,4 @@
-import { Item } from './sub-types/item'
+import { Item } from './item'
 
 export interface Credit {
   id: number

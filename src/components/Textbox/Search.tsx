@@ -21,8 +21,8 @@ export default function SearchBar() {
       : searchType === 'series'
         ? (route = `/series/${name}`)
         : searchType === 'story arc'
-          ? (route = `/arc/${name}`)
-          : (route = `/team/${name}`)
+          ? (route = `/arc-list/${name}`)
+          : (route = `/team-list/${name}`)
 
     router.push(route)
   }
@@ -154,7 +154,11 @@ export default function SearchBar() {
               ? (redirect = `/series/${term}`)
               : type === 'character'
                 ? (redirect = `/character-result/${term}`)
-                : ''
+                : type === 'story arc'
+                  ? (redirect = `/arc-list/${term}`)
+                  : type === 'team'
+                    ? (redirect = `/team-list/${term}`)
+                    : ''
 
             return (
               <div key={index} className="pl-4">

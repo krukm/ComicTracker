@@ -1,10 +1,10 @@
-import { Credit } from './credit'
-import { Item } from './sub-types/item'
-import { ModItem } from './sub-types/modified-item'
-import { Reprint } from './sub-types/reprint'
-import { Variant } from './sub-types/variant'
+import { Credit } from '../sub-types/credit'
+import { Item } from '../sub-types/item'
+import { ModItem } from '../sub-types/modified-item'
+import { Reprint } from '../sub-types/reprint'
+import { Variant } from '../sub-types/variant'
 
-export interface Issue {
+export interface IssueInfo {
   id: number
   publisher: {
     id: number
@@ -50,5 +50,5 @@ export interface Issue {
 }
 
 export interface IssueDataWrapper {
-  results: Issue[]
+  results: IssueInfo[]
 }

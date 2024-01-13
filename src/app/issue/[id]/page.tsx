@@ -1,4 +1,4 @@
-import { Issue } from '@/types/issue'
+import { IssueInfo } from '@/types/issue/issue-info'
 import Image from 'next/image'
 
 async function getIssue(id: number) {
@@ -25,7 +25,7 @@ async function getIssue(id: number) {
 }
 
 export default async function Page({ params }: { params: { id: number } }) {
-  const issue: Issue = await getIssue(params.id)
+  const issue: IssueInfo = await getIssue(params.id)
 
   const getVariantCovers = (): string[] => {
     const covers: string[] = []

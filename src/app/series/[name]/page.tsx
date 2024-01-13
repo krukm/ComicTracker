@@ -1,4 +1,5 @@
-import { SeriesDataWrapper } from '@/types/series'
+import { SeriesDataWrapper } from '@/types/series/series'
+import { capitalizeRegex, regex } from '@/utils/regex'
 import Link from 'next/link'
 
 async function getSeries(name: string) {
@@ -29,10 +30,8 @@ async function getSeries(name: string) {
 export default async function Page({ params }: { params: { name: string } }) {
   const series: SeriesDataWrapper = await getSeries(params.name)
   const formattedName = params.name
-    .replace('%20', ' ')
-    .replace('%E2%80', '...')
-    .replace('%A6', '?')
-    .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())
+    .replace(regex, ' ')
+    .replace(capitalizeRegex, (letter) => letter.toUpperCase())
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import { CharacterResultDataWrapper } from '@/types/character-result'
+import { CharacterResultDataWrapper } from '@/types/character/character-result'
 import Link from 'next/link'
 
 async function getCharacterResult(name: string) {
