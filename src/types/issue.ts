@@ -1,31 +1,8 @@
-interface Item {
-  id: number
-  name: string
-}
-
-interface ModItem {
-  id: number
-  name: string
-  modified: string
-}
-
-interface Credit {
-  id: number
-  creator: string
-  role: Item[]
-}
-
-interface Reprint {
-  id: number
-  issue: string
-}
-
-interface Variant {
-  name?: string
-  sku?: string
-  upc?: string
-  image: string
-}
+import { Credit } from './credit'
+import { Item } from './sub-types/item'
+import { ModItem } from './sub-types/modified-item'
+import { Reprint } from './sub-types/reprint'
+import { Variant } from './sub-types/variant'
 
 export interface Issue {
   id: number

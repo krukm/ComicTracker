@@ -20,7 +20,7 @@ async function getSeries(name: string) {
   )
 
   if (!res.ok) {
-    throw new Error('Something went wrong')
+    throw new Error(`Received response: ${res.statusText}`)
   }
 
   return res.json()

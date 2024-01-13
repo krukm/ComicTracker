@@ -17,7 +17,6 @@ interface Props {
    * @returns void
    */
   filtered: (filterApplied: boolean) => void
-
   /**
    * The string to filter an array.
    * @param term - The current filter value.
@@ -32,7 +31,7 @@ export default function FilterBar(props: Props) {
   useEffect(() => {
     props.filtered(filter.length > 2)
     props.filterString(filter)
-  }, [filter])
+  }, [filter, props])
 
   return (
     <div className="px-5 pt-2 md:px-0 max-w-lg m-auto">

@@ -3,13 +3,28 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import Button from '../Button/Button'
+import { useLocalStorage } from '@/utils/hooks/use-local-storage'
+import Link from 'next/link'
 
 export default function SearchBar() {
   const router = useRouter()
   const [name, setName] = useState('')
+  const [searchType, setSearchType] = useState('character')
+  const [history, setHistory] = useLocalStorage('serachHistory', [])
 
   const handleSubmit = () => {
-    router.push(`/series/${name}`)
+    let route = ''
+    savedSearches()
+
+    searchType === 'character'
+      ? (route = `/character-result/${name}`)
+      : searchType === 'series'
+        ? (route = `/series/${name}`)
+        : searchType === 'story arc'
+          ? (route = `/arc/${name}`)
+          : (route = `/team/${name}`)
+
+    router.push(route)
   }
 
   const handleKeyDown = (e: { key: string }) => {
@@ -18,10 +33,18 @@ export default function SearchBar() {
     }
   }
 
+  const savedSearches = () => {
+    const searchHistoryArray = JSON.parse(
+      localStorage.getItem('searchHistory') || '[]',
+    )
+    searchHistoryArray.push(`${searchType}::${name}`)
+    setHistory([...history, searchHistoryArray])
+  }
+
   return (
     <div className="px-5 md:px-0 max-w-lg m-auto pt-48">
       <label className="text-1xl md:text-3xl">
-        Search for a series by name:
+        {`Search for a ${searchType}:`}
       </label>
       <div className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -59,6 +82,87 @@ export default function SearchBar() {
         >
           Search
         </Button>
+      </div>
+      <div>
+        <div className="flex p-2">
+          <div className="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
+            <input
+              className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 rounded-full border-2 border-solid border-neutral-300 accent-blue-900 hover:cursor-pointer"
+              type="radio"
+              id="character"
+              value="character"
+              checked={searchType === 'character'}
+              onChange={(e) => setSearchType(e.target.value)}
+            />
+            <label
+              className="mt-px inline-block pl-[0.15rem]"
+              htmlFor="character"
+            >
+              character
+            </label>
+          </div>
+          <div className="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
+            <input
+              className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 rounded-full border-2 border-solid border-neutral-300 accent-blue-900 hover:cursor-pointer"
+              type="radio"
+              id="series"
+              value="series"
+              checked={searchType === 'series'}
+              onChange={(e) => setSearchType(e.target.value)}
+            />
+            <label className="mt-px inline-block pl-[0.15rem]" htmlFor="series">
+              series
+            </label>
+          </div>
+          <div className="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
+            <input
+              className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 rounded-full border-2 border-solid border-neutral-300 accent-blue-900 hover:cursor-pointer"
+              type="radio"
+              id="arc"
+              value="story arc"
+              checked={searchType === 'story arc'}
+              onChange={(e) => setSearchType(e.target.value)}
+            />
+            <label className="mt-px inline-block pl-[0.15rem]" htmlFor="arc">
+              story arc
+            </label>
+          </div>
+          <div className="mb-[0.125rem] inline-block min-h-[1.5rem] pl-[1.5rem]">
+            <input
+              className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 rounded-full border-2 border-solid border-neutral-300 accent-blue-900 hover:cursor-pointer"
+              type="radio"
+              id="team"
+              value="team"
+              checked={searchType === 'team'}
+              onChange={(e) => setSearchType(e.target.value)}
+            />
+            <label className="mt-px inline-block pl-[0.15rem]" htmlFor="team">
+              team
+            </label>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="p-2">Recent searches:</div>
+        <div>
+          {history.map((searchItem: string, index: number) => {
+            const type = searchItem.toString().split('::')[0]
+            const term = searchItem.toString().split('::')[1]
+            let redirect = ''
+
+            type === 'series'
+              ? (redirect = `/series/${term}`)
+              : type === 'character'
+                ? (redirect = `/character-result/${term}`)
+                : ''
+
+            return (
+              <div key={index} className="pl-4">
+                <Link href={redirect}>{term}</Link>
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

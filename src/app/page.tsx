@@ -1,12 +1,14 @@
-import FilterBar from '@/components/Textbox/Filter'
-import SearchBar from '@/components/Textbox/Search'
+import dynamic from 'next/dynamic'
+
+// This allows the client to hydrate with differing render than the server component.
+const SearchBar = dynamic(() => import('@/components/Textbox/Search'), {
+  ssr: false,
+})
 
 export default async function Home() {
   return (
     <main>
-      <div>
-        <SearchBar />
-      </div>
+      <SearchBar />
     </main>
   )
 }

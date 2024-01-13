@@ -19,6 +19,16 @@ export default function Page() {
     [key: string]: CollectionItem[]
   }>({})
 
+  const filterSeries = (filterString: string) => {
+    Object.keys(orderedCollection).map((key) => {
+      if (key.toLowerCase().includes(filterString)) {
+        setFilteredArray({
+          ...filteredArray,
+          [key]: Object.values(orderedCollection[key]),
+        })
+      }
+    })
+  }
 
   useEffect(() => {
     getCollectionData()
@@ -38,22 +48,14 @@ export default function Page() {
   }, [collection])
 
   useEffect(() => {
-    if(filtered) {
-        filterSeries(filterString)
+    if (filtered) {
+      filterSeries(filterString)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtered])
 
   const isFiltered = (filtered: boolean) => {
     setFiltered(filtered)
-  }
-
-  const filterSeries = (filterString: string) => {
-    Object.keys(orderedCollection)
-            .map((key) => {
-                if(key.toLowerCase().includes(filterString)) {
-                    setFilteredArray({...filteredArray, [key] : Object.values(orderedCollection[key])})
-                }
-            })
   }
 
   const getCollectionData = async () => {
@@ -70,7 +72,12 @@ export default function Page() {
 
   return (
     <div className="ml-4">
-      <FilterBar filtered={isFiltered} filterString={setFilterString} collectionSize={collection.length} seriesSize={seriesSize} />
+      <FilterBar
+        filtered={isFiltered}
+        filterString={setFilterString}
+        collectionSize={collection.length}
+        seriesSize={seriesSize}
+      />
       {loading ? (
         <Loading />
       ) : (
