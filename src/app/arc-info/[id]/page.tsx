@@ -62,7 +62,7 @@ export default async function Page({ params }: { params: { id: number } }) {
           alt={`image of ${arc.name} story arc`}
           height={500}
           width={350}
-        ></Image>
+        />
       </div>
       <div className="p-10">{arc.desc}</div>
       <div className="flex flex-col self-center">

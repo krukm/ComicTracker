@@ -65,9 +65,9 @@ export default async function Page({ params }: { params: { id: number } }) {
           alt={`image of ${teamInfo.name}`}
           height={700}
           width={450}
-        ></Image>
+        />
       </div>
-      <div className=" self-center m-8">{teamInfo.desc}</div>
+      <div className="p-10">{teamInfo.desc}</div>
       <div>
         <div className="flex flex-col self-center">
           <div className="pb-4 text-4xl">Appearing in these issues:</div>

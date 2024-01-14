@@ -54,7 +54,7 @@ export default async function Page({ params }: { params: { id: number } }) {
             }
             height={350}
             width={175}
-          ></Image>
+          />
           {issue.variants.length > 0 ? (
             getVariantCovers().map((variant) => {
               return (
@@ -69,7 +69,7 @@ export default async function Page({ params }: { params: { id: number } }) {
                   }
                   height={350}
                   width={175}
-                ></Image>
+                />
               )
             })
           ) : (

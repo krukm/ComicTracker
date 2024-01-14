@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <div
-      className={`${rubikGlitch.className} flex justify-between items-center w-full h-20 px-4 z-50 text-blue-900 bg-yellow-600 fixed nav`}
+      className={`${rubikGlitch.className} flex justify-between items-center w-full h-20 px-4 z-50 border-b-2 border-yellow-700 text-blue-900 bg-yellow-600 shadow-lg shadow-yellow-800 fixed nav`}
     >
       <div>
         <h1 className="text-3xl md:text-5xl ml-2">Comic Collector</h1>

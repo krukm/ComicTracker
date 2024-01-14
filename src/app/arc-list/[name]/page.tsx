@@ -41,7 +41,11 @@ export default async function Page({ params }: { params: { name: string } }) {
       <div className="self-center pt-4">
         {arcs.results.map((arc, index) => {
           return (
-            <Link key={index} href={`/arc-info/${arc.id}`} className="p-1 text-3xl">
+            <Link
+              key={index}
+              href={`/arc-info/${arc.id}`}
+              className="p-1 text-3xl"
+            >
               {arc.name}
             </Link>
           )

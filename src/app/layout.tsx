@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { robotoMono } from './../utils/fonts'
+import { scriptFont } from './../utils/fonts'
 import NavBar from '@/components/Navbar/Navbar'
 import './globals.css'
 
@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={robotoMono.className}>
+      <body className={scriptFont.className}>
         <NavBar />
         <main className="pt-20">{children}</main>
       </body>

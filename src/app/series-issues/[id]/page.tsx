@@ -45,7 +45,7 @@ export default async function Page({ params }: { params: { id: number } }) {
                 }
                 height={500}
                 width={200}
-              ></Image>
+              />
             </Link>
             <div className="text-center">
               #{issue.number}: {toUSDate(issue.cover_date)}
