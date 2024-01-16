@@ -1,54 +1,9 @@
+import { getTeamInfo, getTeamIssues } from '@/app/api/requests/team-requests'
 import { ListIssueDataWrapper } from '@/types/issue/list-issue'
 import { TeamInfo } from '@/types/team/team-info'
 import { toUSDate } from '@/utils/dates'
 import Image from 'next/image'
 import Link from 'next/link'
-
-async function getTeamInfo(id: number) {
-  // Create a base64-encoded credentials string
-  const base64Credentials = btoa(
-    `${process.env.METRON_USERNAME}:${process.env.METRON_PASSWORD}`,
-  )
-  const url = `${process.env.METRON_API_BASE_URL}/team/${id}/`
-
-  // Fetch data with Basic Authentication
-  const res = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Basic ${base64Credentials}`,
-    },
-  })
-
-  if (!res.ok) {
-    throw new Error(`unable to find team - ${res.statusText}`)
-  }
-
-  return res.json()
-}
-
-async function getTeamIssues(id: number) {
-  // Create a base64-encoded credentials string
-  const base64Credentials = btoa(
-    `${process.env.METRON_USERNAME}:${process.env.METRON_PASSWORD}`,
-  )
-  const url = `${process.env.METRON_API_BASE_URL}/team/${id}/issue_list/`
-
-  // Fetch data with Basic Authentication
-  const res = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Basic ${base64Credentials}`,
-    },
-  })
-
-  if (!res.ok) {
-    throw new Error(`Error: unable to find team issues - ${res.statusText}`)
-  }
-
-  return res.json()
-}
 
 export default async function Page({ params }: { params: { id: number } }) {
   const teamInfo: TeamInfo = await getTeamInfo(params.id)

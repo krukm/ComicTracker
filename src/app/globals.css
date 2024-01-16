@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.page {
+  @apply flex flex-col m-0 w-auto px-2 md:p-8;
+}
+
+.page-header {
+  @apply flex flex-col self-center mt-4 p-3 text-center text-5xl md:text-6xl bg-gray-200 border-4 border-gray-900 shadow-lg shadow-black;
+}
+
+.page-subheader {
+  @apply pb-2 text-4xl;
+}
+
+.image-holder {
+  @apply p-4 self-center relative aspect-square min-w-80;
+}
+
+.image {
+  @apply w-full object-cover rounded-md shadow-lg shadow-black;
+}
+
+.image-issue {
+}
+
+.issue-list-holder {
+  @apply flex flex-col p-8;
+}
+
+.issue-list {
+  @apply columns-1 md:columns-3 md:gap-8;
+}
+
+.list-item {
+  @apply flex px-2 rounded-md border-2 border-slate-500 bg-slate-300;
+}
+
+.comic-box {
+  @apply m-2 py-2 px-6 bg-white border-4 border-gray-900 shadow-lg shadow-black;
+}

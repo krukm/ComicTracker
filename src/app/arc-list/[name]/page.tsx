@@ -1,42 +1,20 @@
+import { getArcs } from '@/app/api/requests/arc-requests'
 import { ArcResultDataWrapper } from '@/types/arc/arc-result'
-import { capitalizeRegex, regex } from '@/utils/regex'
+import { formattedName } from '@/utils/regex'
 import Link from 'next/link'
-
-async function getArcs(name: string) {
-  // Create a base64-encoded credentials string
-  const base64Credentials = btoa(
-    `${process.env.METRON_USERNAME}:${process.env.METRON_PASSWORD}`,
-  )
-
-  // Fetch data with Basic Authentication
-  const res = await fetch(
-    `${process.env.METRON_API_BASE_URL}/arc/?name=${name}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Basic ${base64Credentials}`,
-      },
-    },
-  )
-
-  if (!res.ok) {
-    throw new Error(`Received response: ${res.statusText}`)
-  }
-
-  return res.json()
-}
+import { redirect } from 'next/navigation'
 
 export default async function Page({ params }: { params: { name: string } }) {
   const arcs: ArcResultDataWrapper = await getArcs(params.name)
-  const formattedArcName = params.name
-    .replace(regex, ' ')
-    .replace(capitalizeRegex, (letter) => letter.toUpperCase())
+
+  if (arcs.results.length === 1) {
+    redirect(`/arc-info/${arcs.results[0].id}`)
+  }
 
   return (
-    <div className="flex flex-col self-center m-8">
-      <div className="self-center py-4 text-5xl text-blue-600">
-        Story Arcs for {formattedArcName}
+    <div className="page">
+      <div className="page-header">
+        Story Arcs for {formattedName(params.name)}
       </div>
       <div className="self-center pt-4">
         {arcs.results.map((arc, index) => {
@@ -44,7 +22,7 @@ export default async function Page({ params }: { params: { name: string } }) {
             <Link
               key={index}
               href={`/arc-info/${arc.id}`}
-              className="p-1 text-3xl"
+              className="comic-box"
             >
               {arc.name}
             </Link>

@@ -34,7 +34,7 @@ export default function FilterBar(props: Props) {
   }, [filter, props])
 
   return (
-    <div className="px-5 pt-2 md:px-0 max-w-lg m-auto">
+    <div className="px-5 pt-2 w-full md:px-0 md:w-1/2 m-auto fixed left-1/2 -translate-x-1/2">
       <div className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <svg
@@ -49,8 +49,8 @@ export default function FilterBar(props: Props) {
         </div>
         <input
           type="search"
-          id="default-search"
-          className="block w-full mt-2.5 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          id="filter"
+          className="block w-full mt-2.5 p-2 ps-10 text-lg md:text-2xl text-gray-900 outline-none rounded-lg bg-white shadow-lg shadow-slate-500"
           placeholder={`Filter ${props.collectionSize} comics collected...from ${props.seriesSize} series!`}
           required
           autoFocus

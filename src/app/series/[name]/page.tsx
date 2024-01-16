@@ -1,44 +1,17 @@
+import { getSeries } from '@/app/api/requests/series-requests'
 import { SeriesDataWrapper } from '@/types/series/series'
-import { capitalizeRegex, regex } from '@/utils/regex'
+import { dateFirst, formattedName, regex } from '@/utils/regex'
 import Link from 'next/link'
-
-async function getSeries(name: string) {
-  // Create a base64-encoded credentials string
-  const base64Credentials = btoa(
-    `${process.env.METRON_USERNAME}:${process.env.METRON_PASSWORD}`,
-  )
-
-  // Fetch data with Basic Authentication
-  const res = await fetch(
-    `${process.env.METRON_API_BASE_URL}/series/?name=${name}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Basic ${base64Credentials}`,
-      },
-    },
-  )
-
-  if (!res.ok) {
-    throw new Error(`Received response: ${res.statusText}`)
-  }
-
-  return res.json()
-}
 
 export default async function Page({ params }: { params: { name: string } }) {
   const series: SeriesDataWrapper = await getSeries(params.name)
-  const formattedName = params.name
-    .replace(regex, ' ')
-    .replace(capitalizeRegex, (letter) => letter.toUpperCase())
 
   return (
     <div>
-      <div className="py-5 text-center text-5xl">
-        {series.results.length} series found for {formattedName}
+      <div className="page-header">
+        {series.results.length} series found for {formattedName(params.name)}
       </div>
-      <div className="grid grid-rows-auto">
+      <div className="flex flex-col">
         {series.results
           .sort((a, b) => {
             return (+a.year_began || 0) - (+b.year_began || 0) || 0
@@ -46,16 +19,11 @@ export default async function Page({ params }: { params: { name: string } }) {
           .map((series, i) => {
             return (
               <Link
-                className="py-2 pl-8"
+                className="comic-box"
                 key={i}
                 href={`/series-issues/${series.id}`}
               >
-                <div className="text-2xl">
-                  {series.series
-                    .split(/(?=\()/g)
-                    .sort()
-                    .join(' - ')}
-                </div>
+                <div className="text-2xl">{dateFirst(series.series)}</div>
                 <div className="pl-4">{series.issue_count} issues</div>
               </Link>
             )

@@ -1,49 +1,31 @@
+import { getCharacterResult } from '@/app/api/requests/character-requests'
 import { CharacterResultDataWrapper } from '@/types/character/character-result'
 import Link from 'next/link'
-
-async function getCharacterResult(name: string) {
-  // Create a base64-encoded credentials string
-  const base64Credentials = btoa(
-    `${process.env.METRON_USERNAME}:${process.env.METRON_PASSWORD}`,
-  )
-  const url = `${process.env.METRON_API_BASE_URL}/character/?name=${name}`
-
-  // Fetch data with Basic Authentication
-  const res = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Basic ${base64Credentials}`,
-    },
-  })
-
-  if (!res.ok) {
-    throw new Error(`Error: unable to find character - ${res.statusText}`)
-  }
-
-  return res.json()
-}
+import { redirect } from 'next/navigation'
 
 export default async function Page({ params }: { params: { name: string } }) {
   const characterList: CharacterResultDataWrapper = await getCharacterResult(
     params.name,
   )
 
+  if (characterList.results.length === 1) {
+    redirect(`/character/${characterList.results[0].id}`)
+  }
+
   return (
-    <div>
-      <div className="grid grid-rows-auto">
-        {characterList.results.map((character, i) => {
-          return (
-            <Link
-              className="py-2 pl-8"
-              key={i}
-              href={`/character/${character.id}`}
-            >
-              <div className="text-2xl">{character.name}</div>
-            </Link>
-          )
-        })}
-      </div>
+    <div className="flex flex-col items-center">
+      <div className="my-12 mx-4 md:mx-0 text-6xl">Which {params.name}?</div>
+      {characterList.results.map((character, i) => {
+        return (
+          <Link
+            className="mt-4 p-3 bg-white border-4 border-gray-900 shadow-lg shadow-black"
+            key={i}
+            href={`/character/${character.id}`}
+          >
+            <div className="text-2xl">{character.name}</div>
+          </Link>
+        )
+      })}
     </div>
   )
 }

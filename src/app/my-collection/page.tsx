@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Loading from '../loading'
 import FilterBar from '@/components/Textbox/Filter'
+import { toYearOnly } from '@/utils/dates'
+import Button from '@/components/Button/Button'
 
 export default function Page() {
   const [collection, setCollection] = useState<CollectionItem[]>([])
@@ -78,10 +80,16 @@ export default function Page() {
         collectionSize={collection.length}
         seriesSize={seriesSize}
       />
+      <Button
+        onClick={() => location.reload()}
+        className="mt-10 px-1 bg-slate-300 rounded-md border-2 border-slate-500"
+      >
+        Refresh
+      </Button>
       {loading ? (
         <Loading />
       ) : (
-        <div>
+        <div className="pt-15">
           {Object.entries(filtered ? filteredArray : orderedCollection)
             .sort()
             .map(([key, value], index) => {
@@ -105,12 +113,21 @@ export default function Page() {
                           className="flex-auto px-5 py-1"
                           key={issue.issue_id}
                         >
-                          <Link href={`/issue/${issue.issue_id}`}>
-                            {issue.issue_name
-                              .split(/(?=\#)/g)
-                              .sort()
-                              .join('\t')}
-                          </Link>
+                          <div className="flex items-baseline">
+                            <div className="basis-[20%] md:basis-[6%]">
+                              issue #{issue.issue_number}
+                            </div>
+                            <div className="basis-[15%] md:basis-[3%]">
+                              ({toYearOnly(issue.cover_date)})
+                            </div>
+                            <div className="basis-[30%] md:basis-[8%]"></div>
+                            <Link
+                              href={`/api/delete-collection?issue_id=${issue.issue_id}`}
+                              className="px-1 rounded-md text-red-800 bg-slate-300 border-2 border-slate-500"
+                            >
+                              Remove
+                            </Link>
+                          </div>
                         </div>
                       )
                     })}

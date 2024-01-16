@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={scriptFont.className}>
+      <body className={`${scriptFont.className} bg-slate-400`}>
         <NavBar />
         <main className="pt-20">{children}</main>
       </body>
