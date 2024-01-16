@@ -10,8 +10,8 @@ export default async function Page({ params }: { params: { name: string } }) {
     .replace(capitalizeRegex, (letter) => letter.toUpperCase())
 
   return (
-    <div className="flex flex-col self-center m-10">
-      <div className="self-center py-8 text-5xl text-blue-600">
+    <div className="page">
+      <div className="page-subheading">
         Teams matching {formattedTeamName}:
       </div>
       {teamList.results.map((team, index) => {
@@ -19,7 +19,7 @@ export default async function Page({ params }: { params: { name: string } }) {
           <Link
             key={index}
             href={`/team/${team.id}`}
-            className="self-center p-3 text-2xl"
+            className="comic-box"
           >
             {team.name}
           </Link>

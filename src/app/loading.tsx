@@ -8,10 +8,11 @@ export default function Loading() {
           className="animate-spin h-full w-full object-cover"
           src="/x-logo.png"
           alt="loading"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           fill
         />
       </div>
-      <div className="self-end pt-96 pr-4 text-xs">
+      <div className="self-end md:pt-96 pr-4 text-xs">
         X-Men image © 2014 Marvel
       </div>
     </div>

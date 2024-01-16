@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: { id: number } }) {
   return (
     <div className="page">
       <div className="page-header">
-        <div className="">{character.name}</div>
+        <div>{character.name}</div>
         {character.alias && character.alias?.length > 0 ? (
           <div className="flex self-center text-sm md:text-lg">
             <div className="pr-2">AKA:</div>
@@ -36,17 +36,16 @@ export default async function Page({ params }: { params: { id: number } }) {
           <></>
         )}
       </div>
-      <div className="flex flex-col md:flex-row self-center md:mt-8">
-        <div>
+      <div className="character-container">
           {character.teams.length > 0 ? (
-            <div className="flex flex-col pb-2 md:p-4">
-              <div className="text-lg md:mb-2">Member of:</div>
+            <div className="team-container">
+              <div className="page-subheading">Member of:</div>
               {character.teams.map((team, index) => {
                 return (
                   <Link
                     key={index}
                     href={`/team/${team.id}`}
-                    className="py-1 px-2 rounded-md border-2 border-slate-500 bg-slate-300"
+                    className="team-item"
                   >
                     {team.name}
                   </Link>
@@ -56,8 +55,7 @@ export default async function Page({ params }: { params: { id: number } }) {
           ) : (
             <></>
           )}
-        </div>
-        <div className="image-holder">
+        <div className="image-container">
           <Image
             className="image"
             src={character.image ? character.image : ''}
@@ -67,7 +65,7 @@ export default async function Page({ params }: { params: { id: number } }) {
         </div>
         <div className="mt-4 p-4 md:p-10">{character.desc}</div>
       </div>
-      <div className="issue-list-holder">
+      <div className="issue-list-container">
         <div className="page-subheader">Appearing in issues:</div>
         <div className="issue-list">
           {characterIssues.results.map((issue, index) => {

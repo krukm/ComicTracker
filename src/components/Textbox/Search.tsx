@@ -42,7 +42,7 @@ export default function SearchBar() {
   }
 
   return (
-    <div className="px-5 md:px-0 max-w-lg m-auto pt-48">
+    <div className="px-5 md:px-0 max-w-lg m-auto pt-10 md:pt-48">
       <label className="text-1xl md:text-3xl">
         {`Search for a ${searchType}:`}
       </label>
@@ -143,7 +143,7 @@ export default function SearchBar() {
         </div>
       </div>
       <div>
-        <div className="p-2">Recent searches:</div>
+        <div className="page-subheading">Recent searches:</div>
         <div>
           {history.map((searchItem: string, index: number) => {
             const type = searchItem.toString().split('::')[0]
@@ -161,8 +161,8 @@ export default function SearchBar() {
                     : ''
 
             return (
-              <div key={index} className="pl-4">
-                <Link href={redirect}>{term}</Link>
+              <div key={index} className="list-item">
+                <Link href={redirect}>{term} -- from {type}</Link>
               </div>
             )
           })}

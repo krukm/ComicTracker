@@ -16,7 +16,7 @@ export default async function Page({ params }: { params: { name: string } }) {
       <div className="page-header">
         Story Arcs for {formattedName(params.name)}
       </div>
-      <div className="self-center pt-4">
+      <div className="flex flex-col self-center pt-4">
         {arcs.results.map((arc, index) => {
           return (
             <Link

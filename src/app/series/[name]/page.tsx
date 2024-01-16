@@ -1,6 +1,6 @@
 import { getSeries } from '@/app/api/requests/series-requests'
 import { SeriesDataWrapper } from '@/types/series/series'
-import { dateFirst, formattedName, regex } from '@/utils/regex'
+import { dateFirst, formattedName } from '@/utils/regex'
 import Link from 'next/link'
 
 export default async function Page({ params }: { params: { name: string } }) {
@@ -8,7 +8,7 @@ export default async function Page({ params }: { params: { name: string } }) {
 
   return (
     <div>
-      <div className="page-header">
+      <div className="page-subheader">
         {series.results.length} series found for {formattedName(params.name)}
       </div>
       <div className="flex flex-col">

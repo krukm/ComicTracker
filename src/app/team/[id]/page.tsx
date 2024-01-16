@@ -10,34 +10,38 @@ export default async function Page({ params }: { params: { id: number } }) {
   const teamIssues: ListIssueDataWrapper = await getTeamIssues(params.id)
 
   return (
-    <div className="flex flex-col m-4">
-      <div className="self-center py-4 text-6xl text-blue-600">
+    <div className="page">
+      <div className="page-header">
         {teamInfo.name}
       </div>
-      <div className="self-center py-4">
-        <Image
-          src={teamInfo.image ? teamInfo.image : ''}
-          alt={`image of ${teamInfo.name}`}
-          height={700}
-          width={450}
-        />
+      <div className='flex flex-col md:flex-row'>
+        <div className="image-container">
+          <Image
+            src={teamInfo.image ? teamInfo.image : ''}
+            alt={`image of ${teamInfo.name}`}
+            height={700}
+            width={450}
+          />
+        </div>
+        <div className="p-10 self-center">{teamInfo.desc}</div>
       </div>
-      <div className="p-10">{teamInfo.desc}</div>
       <div>
-        <div className="flex flex-col self-center">
-          <div className="pb-4 text-4xl">Appearing in these issues:</div>
-          {teamIssues.results.map((issue, index) => {
-            return (
-              <Link
-                href={`/issue/${issue.id}`}
-                key={index}
-                className="self-center py-1 pl-8"
-              >
-                {issue.series.name} Vol {issue.series.volume} #{issue.number} (
-                {toUSDate(issue.cover_date)})
-              </Link>
-            )
-          })}
+        <div className="issue-list-container">
+          <div className="page-subheading">Appearing in these issues:</div>
+          <div className='issue-list'>
+            {teamIssues.results.map((issue, index) => {
+              return (
+                <Link
+                  href={`/issue/${issue.id}`}
+                  key={index}
+                  className="list-item"
+                >
+                  {issue.series.name} Vol {issue.series.volume} #{issue.number} (
+                  {toUSDate(issue.cover_date)})
+                </Link>
+              )
+            })}
+          </div>
         </div>
       </div>
     </div>

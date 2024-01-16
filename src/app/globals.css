@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Page */
 .page {
-  @apply flex flex-col m-0 w-auto px-2 md:p-8;
+  @apply flex flex-col m-0 w-auto items-center px-2 pb-20 md:p-8;
 }
 
 .page-header {
@@ -11,22 +12,41 @@
 }
 
 .page-subheader {
-  @apply pb-2 text-4xl;
+  @apply p-2 text-4xl;
 }
 
-.image-holder {
-  @apply p-4 self-center relative aspect-square min-w-80;
+.comic-box {
+  @apply md:max-w-max m-2 py-2 px-6 bg-white border-4 border-gray-900 shadow-lg shadow-black;
+}
+
+.sm-button-text {
+  @apply inline-block md:hidden;
+}
+
+.lg-button-text {
+  @apply hidden md:inline-block;
+}
+
+/* Image */
+.image-container {
+  @apply p-4 relative aspect-square min-w-80;
 }
 
 .image {
-  @apply w-full object-cover rounded-md shadow-lg shadow-black;
+  @apply w-full object-fill rounded-md shadow-lg shadow-black;
 }
 
 .image-issue {
+  @apply border-black border-2 rounded-l-md shadow-md shadow-slate-500;
 }
 
-.issue-list-holder {
-  @apply flex flex-col p-8;
+.issue-image-list {
+  @apply grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 mt-6;
+}
+
+/* Issue */
+.issue-list-container {
+  @apply flex flex-col px-4 md:p-8;
 }
 
 .issue-list {
@@ -34,9 +54,18 @@
 }
 
 .list-item {
-  @apply flex px-2 rounded-md border-2 border-slate-500 bg-slate-300;
+  @apply flex px-2 rounded-md border-2 border-slate-500 bg-slate-300 hover:bg-slate-500 hover:text-gray-200;
 }
 
-.comic-box {
-  @apply m-2 py-2 px-6 bg-white border-4 border-gray-900 shadow-lg shadow-black;
+/* Character */
+.character-container {
+    @apply flex flex-col md:flex-row self-center mt-8
+}
+
+.team-container {
+    @apply flex flex-col pb-2 md:p-4 flex-shrink-0
+}
+
+.team-item {
+    @apply min-w-min py-1 px-2 rounded-md border-2 border-slate-500 bg-slate-300
 }

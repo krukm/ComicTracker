@@ -1,28 +1,7 @@
+import { getIssue } from '@/app/api/requests/issue-requests'
 import { IssueInfo } from '@/types/issue/issue-info'
+import { toUSDate } from '@/utils/dates'
 import Image from 'next/image'
-
-async function getIssue(id: number) {
-  // Create a base64-encoded credentials string
-  const base64Credentials = btoa(
-    `${process.env.METRON_USERNAME}:${process.env.METRON_PASSWORD}`,
-  )
-  const url = `${process.env.METRON_API_BASE_URL}/issue/${id}/`
-
-  // Fetch data with Basic Authentication
-  const res = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Basic ${base64Credentials}`,
-    },
-  })
-
-  if (!res.ok) {
-    throw new Error('unable to fetch issue')
-  }
-
-  return res.json()
-}
 
 export default async function Page({ params }: { params: { id: number } }) {
   const issue: IssueInfo = await getIssue(params.id)
@@ -38,47 +17,57 @@ export default async function Page({ params }: { params: { id: number } }) {
   }
 
   return (
-    <div className="w-2/3 m-auto bg-blend-color">
-      <div className="pb-16">
-        <div className="text-center text-3xl py-5">
-          {issue.series.name} #{issue.number}
-        </div>
-        <div className="flex justify-center">
+    <div className="page">
+      <div className="page-header">
+        <div>{issue.series.name} #{issue.number}</div>
+        <div className='flex self-center text-sm md:text-lg'>{toUSDate(issue.cover_date)}</div>
+      </div>
+      <div className="flex flex-col md:flex-row self-center mt-2">
+        <div className="image-container">
           <Image
-            className="outline-double flex-shrink-0 pr-2"
+            className="image-issue"
             src={issue.image ? issue.image : ''}
             alt={
               issue.image
                 ? `image of ${issue.series.name} number ${issue.number}`
                 : ''
             }
-            height={350}
-            width={175}
+            height={500}
+            width={300}
           />
-          {issue.variants.length > 0 ? (
-            getVariantCovers().map((variant) => {
-              return (
-                <Image
-                  className="outline flex-shrink-0 px-2"
-                  key={Math.random() * 10}
-                  src={variant}
-                  alt={
-                    variant
-                      ? `image of ${issue.series.name} number ${issue.number} variant cover`
-                      : ''
-                  }
-                  height={350}
-                  width={175}
-                />
-              )
-            })
-          ) : (
-            <></>
-          )}
+        </div>
+        <div className="md:self-center md:m-6">
+          <div className="page-subheader">{issue.name}</div>
+          <div className="px-8 md:px-2 pb-20 md:pb-0">{issue.desc}</div>
         </div>
       </div>
-      <div className="text-3xl">{issue.name}</div>
-      <div className="pt-2.5">{issue.desc}</div>
+      {issue.variants.length > 0 ? (
+        <div className="-mt-16 md:mt-0">
+          <div className="page-subheader">Variant Covers:</div>
+          <div className="flex flex-col md:flex-row justify-start mt-2">
+            {getVariantCovers().map((variant, index) => {
+              return (
+                  <div className="image-container">
+                    <Image
+                      className="image-issue"
+                      key={index}
+                      src={variant}
+                      alt={
+                        variant
+                          ? `image of ${issue.series.name} number ${issue.number} variant cover`
+                          : ''
+                      }
+                      height={500}
+                      width={300}
+                    />
+                  </div>
+              )
+            })}
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   )
 }

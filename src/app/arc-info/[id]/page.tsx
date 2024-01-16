@@ -12,17 +12,21 @@ export default async function Page({ params }: { params: { id: number } }) {
     <div className="page">
       <div className="page-header">{arc.name}</div>
       <div className="flex flex-col md:flex-row mt-6">
-        <div className="image-holder">
-          <Image
-            className="image"
-            src={arc.image ? arc.image : ''}
-            alt={`image of ${arc.name} story arc`}
-            fill
-          />
-        </div>
+        {arc.image ? (
+          <div className="image-container">
+            <Image
+              className="image"
+              src={arc.image ? arc.image : ''}
+              alt={`image of ${arc.name} story arc`}
+              fill
+            />
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="p-4 md:p-10 md:self-center">{arc.desc}</div>
       </div>
-      <div className="issue-list-holder">
+      <div className="issue-list-container">
         <div className="page-subheader">Across these issues:</div>
         <div className="issue-list">
           {arcIssues.results.map((issue, index) => {
