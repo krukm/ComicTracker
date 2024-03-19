@@ -28,15 +28,21 @@ export async function getCharacter(id: number) {
   return res.json()
 }
 
-export async function getCharacterIssues(id: number) {
-  const url = `${process.env.METRON_API_BASE_URL}/character/${id}/issue_list/`
+export async function getPaginatedCharacterIssueList(urlParams: string) {
+  const page = urlParams.split('page').pop()
+  const id = urlParams.substring(0, urlParams.indexOf('page'))
+  console.log(`getPaginatedCharacterIssueList page: ${page}, id: ${id}`)
+  const url = `${process.env.METRON_API_BASE_URL}/character/${id}/issue_list/?page=${page}`
 
+  console.log(`url = ${url}`)
   const res = await fetch(url, {
     method: 'GET',
     headers: BASE_HEADERS,
   })
+
   if (!res.ok) {
-    throw new Error(`unable to find character issues - ${res.statusText}`)
+    throw new Error(`unable to find issues - ${res.statusText}`)
   }
+
   return res.json()
 }

@@ -29,15 +29,15 @@
 
 /* Image */
 .image-container {
-  @apply p-4 relative aspect-square min-w-80;
+  @apply flex p-4 min-w-80;
 }
 
 .image {
-  @apply w-full object-fill rounded-md shadow-lg shadow-black;
+  @apply rounded-md shadow-lg shadow-black;
 }
 
 .image-issue {
-  @apply border-black border-2 rounded-l-md shadow-md shadow-slate-500;
+  @apply inset-0 mx-auto my-auto border-black border-2 rounded-l-md shadow-md shadow-slate-500;
 }
 
 .issue-image-list {
@@ -46,7 +46,7 @@
 
 /* Issue */
 .issue-list-container {
-  @apply flex flex-col px-4 md:p-8;
+  @apply flex flex-col w-full px-4 md:p-8;
 }
 
 .issue-list {
@@ -59,13 +59,13 @@
 
 /* Character */
 .character-container {
-    @apply flex flex-col md:flex-row self-center mt-8
+  @apply flex flex-col w-5/6 md:flex-row justify-between mt-8;
 }
 
 .team-container {
-    @apply flex flex-col pb-2 md:p-4 flex-shrink-0
+  @apply flex flex-col pb-2 md:p-4 flex-shrink-0;
 }
 
 .team-item {
-    @apply min-w-min py-1 px-2 rounded-md border-2 border-slate-500 bg-slate-300
+  @apply min-w-min py-1 px-2 rounded-md border-2 border-slate-500 bg-slate-300;
 }

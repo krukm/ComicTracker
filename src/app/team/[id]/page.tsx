@@ -11,10 +11,8 @@ export default async function Page({ params }: { params: { id: number } }) {
 
   return (
     <div className="page">
-      <div className="page-header">
-        {teamInfo.name}
-      </div>
-      <div className='flex flex-col md:flex-row'>
+      <div className="page-header">{teamInfo.name}</div>
+      <div className="flex flex-col md:flex-row">
         <div className="image-container">
           <Image
             src={teamInfo.image ? teamInfo.image : ''}
@@ -28,7 +26,7 @@ export default async function Page({ params }: { params: { id: number } }) {
       <div>
         <div className="issue-list-container">
           <div className="page-subheading">Appearing in these issues:</div>
-          <div className='issue-list'>
+          <div className="issue-list">
             {teamIssues.results.map((issue, index) => {
               return (
                 <Link
@@ -36,8 +34,8 @@ export default async function Page({ params }: { params: { id: number } }) {
                   key={index}
                   className="list-item"
                 >
-                  {issue.series.name} Vol {issue.series.volume} #{issue.number} (
-                  {toUSDate(issue.cover_date)})
+                  {issue.series.name} Vol {issue.series.volume} #{issue.number}{' '}
+                  ({toUSDate(issue.cover_date)})
                 </Link>
               )
             })}

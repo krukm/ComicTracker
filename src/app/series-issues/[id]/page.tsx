@@ -1,15 +1,15 @@
-import { SeriesIssueDataWrapper } from '@/types/series/series-issue'
 import Link from 'next/link'
 import Image from 'next/image'
 import { toUSDate } from '@/utils/dates'
-import { getSeriesIssues } from '@/app/api/requests/series-requests'
+import { getSeriesIssueList } from '@/app/api/requests/series-requests'
+import { PaginatedIssueList } from '@/types/issue/paginated-issue-list'
 
 export default async function Page({ params }: { params: { id: number } }) {
-  const seriesIssues: SeriesIssueDataWrapper = await getSeriesIssues(params.id)
+  const issueList: PaginatedIssueList = await getSeriesIssueList(params.id)
 
   return (
     <div className="issue-image-list">
-      {seriesIssues.results.map((issue) => {
+      {issueList.results.map((issue) => {
         return (
           <div className="justify-self-center p-4" key={issue.id}>
             <Link href={`/issue/${issue.id}`}>

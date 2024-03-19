@@ -11,20 +11,25 @@ export default async function Page({ params }: { params: { id: number } }) {
   return (
     <div className="page">
       <div className="page-header">{arc.name}</div>
-      <div className="flex flex-col md:flex-row mt-6">
+      <div className="flex flex-col mt-6 md:flex-row">
         {arc.image ? (
-          <div className="image-container">
+          <div className="image-container justify-center">
             <Image
               className="image"
               src={arc.image ? arc.image : ''}
               alt={`image of ${arc.name} story arc`}
-              fill
+              width={200}
+              height={200}
             />
           </div>
         ) : (
           <></>
         )}
-        <div className="p-4 md:p-10 md:self-center">{arc.desc}</div>
+        {arc.desc ? (
+          <div className="p-4 md:p-10 md:self-center">{arc.desc}</div>
+        ) : (
+          <></>
+        )}
       </div>
       <div className="issue-list-container">
         <div className="page-subheader">Across these issues:</div>

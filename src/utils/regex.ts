@@ -1,6 +1,3 @@
-export const regex = /[`~!@#$%^&*()-_+{}[\]\\|,.//?;':"]/g
-export const capitalizeRegex = /(^\w{1})|(\s+\w{1})/g
-
 /**
  * Function to move date field in parethesis to beginning of the passed string.
  */
@@ -15,7 +12,32 @@ export const dateFirst = (string: string): string => {
  * Function to format name strings from api.
  */
 export const formattedName = (string: string): string => {
-  return string
-    .replace(regex, ' ')
-    .replace(capitalizeRegex, (letter) => letter.toUpperCase())
+  const newString = string.replace(/[^a-zA-Z ]/g, '')
+  return newString
+    .split(/(\d+|[A-Z][a-z]*)/)
+    .filter((v) => v !== '')
+    .join(' ')
+}
+
+/**
+ * Function to get id for pagination.
+ */
+export const paginationId = (string: string): string => {
+  const newString = string
+    .substring(0, string.indexOf('page'))
+    .split('character/')
+    .pop()
+  // console.log(`paginationId input: ${string}`)
+  // console.log(`paginationId outout: ${newString}`)
+  return newString ? newString : ''
+}
+
+/**
+ * Function to extract the next page number from a paginated url.
+ */
+export const paginationPageNumber = (string: string): number => {
+  const nextPageNumber = Number(string.split('?page=').pop())
+  console.log(`paginationPageNumber input: ${string}`)
+  console.log(`paginationPageNumber output: ${nextPageNumber}`)
+  return nextPageNumber ? nextPageNumber : 1
 }

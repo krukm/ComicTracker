@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 export default function SearchBar() {
   const router = useRouter()
-  const [name, setName] = useState('')
+  const [term, setTerm] = useState('')
   const [searchType, setSearchType] = useState('character')
   const [history, setHistory] = useLocalStorage('serachHistory', [])
 
@@ -17,12 +17,12 @@ export default function SearchBar() {
     savedSearches()
 
     searchType === 'character'
-      ? (route = `/character-result/${name}`)
+      ? (route = `/character-result/${term}`)
       : searchType === 'series'
-        ? (route = `/series/${name}`)
+        ? (route = `/series/${term}`)
         : searchType === 'story arc'
-          ? (route = `/arc-list/${name}`)
-          : (route = `/team-list/${name}`)
+          ? (route = `/arc-list/${term}`)
+          : (route = `/team-list/${term}`)
 
     router.push(route)
   }
@@ -37,7 +37,7 @@ export default function SearchBar() {
     const searchHistoryArray = JSON.parse(
       localStorage.getItem('searchHistory') || '[]',
     )
-    searchHistoryArray.push(`${searchType}::${name}`)
+    searchHistoryArray.push(`${searchType}::${term}`)
     setHistory([...history, searchHistoryArray])
   }
 
@@ -71,9 +71,9 @@ export default function SearchBar() {
           placeholder={`${searchType}...`}
           required
           autoFocus
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setTerm(e.target.value)}
           onKeyDown={handleKeyDown}
-          value={name}
+          value={term}
         />
         <Button
           className="text-gray-900 absolute end-2.5 bottom-2.5 bg-white hover:bg-yellow-500 focus:outline-none focus:ring-gray-300 rounded-lg text-sm px-4 py-2"
@@ -162,7 +162,9 @@ export default function SearchBar() {
 
             return (
               <div key={index} className="list-item">
-                <Link href={redirect}>{term} -- from {type}</Link>
+                <Link href={redirect}>
+                  {term} -- from {type}
+                </Link>
               </div>
             )
           })}

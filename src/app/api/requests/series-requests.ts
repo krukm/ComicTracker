@@ -15,7 +15,7 @@ export async function getSeries(name: string) {
   return res.json()
 }
 
-export async function getSeriesIssues(id: number) {
+export async function getSeriesIssueList(id: number) {
   const url = `${process.env.METRON_API_BASE_URL}/series/${id}/issue_list/`
 
   const res = await fetch(url, {
