@@ -1,14 +1,29 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { toUSDate } from '@/utils/dates'
-import { getSeriesIssueList } from '@/app/api/requests/series-requests'
+import { getPaginatedSeriesIssueList } from '@/app/api/requests/series-requests'
 import { PaginatedIssueList } from '@/types/issue/paginated-issue-list'
+import { paginationId, paginationPageNumber } from '@/utils/regex'
 
-export default async function Page({ params }: { params: { id: number } }) {
-  const issueList: PaginatedIssueList = await getSeriesIssueList(params.id)
+export default async function Page({ params }: { params: { params: string } }) {
+  const issueList: PaginatedIssueList = await getPaginatedSeriesIssueList(params.params)
+  const seriesId = paginationId(params.params)
 
   return (
     <div className="issue-image-list">
+        {issueList.previous ? (
+          <Link
+            href={`/series-issues/${
+              seriesId
+              }page${paginationPageNumber(issueList.previous)
+            }`}
+            className="list-item justify-center max-h-8 self-center mx-5"
+          >
+            Previous issues
+          </Link>
+        ) : (
+          <></>
+        )}
       {issueList.results.map((issue) => {
         return (
           <div className="justify-self-center p-4" key={issue.id}>
@@ -34,7 +49,7 @@ export default async function Page({ params }: { params: { id: number } }) {
                 issue.number
               }&issue_name=${issue.issue.replace('#', '%23')}&cover_date=${
                 issue.cover_date
-              }&series_name=${issue.series.name}&series_id=${params.id}`}
+              }&series_name=${issue.series.name}&series_id=${seriesId}`}
             >
               <div className="sm-button-text">add</div>
               <div className="lg-button-text">add to collection</div>
@@ -42,6 +57,19 @@ export default async function Page({ params }: { params: { id: number } }) {
           </div>
         )
       })}
+        {issueList.next ? (
+          <Link
+            href={`/series-issues/${
+              seriesId
+              }page${paginationPageNumber(issueList.next)
+            }`}
+            className="list-item justify-center max-h-8 self-center"
+          >
+            More issues
+          </Link>
+        ) : (
+          <></>
+        )}
     </div>
   )
 }

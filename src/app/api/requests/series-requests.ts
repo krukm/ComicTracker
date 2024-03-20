@@ -15,8 +15,10 @@ export async function getSeries(name: string) {
   return res.json()
 }
 
-export async function getSeriesIssueList(id: number) {
-  const url = `${process.env.METRON_API_BASE_URL}/series/${id}/issue_list/`
+export async function getPaginatedSeriesIssueList(urlParams: string) {
+  const page = urlParams.split('page').pop()
+  const id = urlParams.substring(0, urlParams.indexOf('page'))
+  const url = `${process.env.METRON_API_BASE_URL}/series/${id}/issue_list/?page=${page}`
 
   const res = await fetch(url, {
     method: 'GET',

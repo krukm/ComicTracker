@@ -43,9 +43,9 @@ export default async function Page({ params }: { params: { params: string } }) {
         {issueList.next ? (
           <Link
             href={`/issue-list/${
-              paginationId(params.params) +
-              'page' +
-              paginationPageNumber(issueList.next)
+              paginationId(
+                params.params,
+              )}page${paginationPageNumber(issueList.next)
             }`}
             className="list-item justify-center"
           >

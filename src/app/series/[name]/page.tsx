@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: { name: string } }) {
               <Link
                 className="comic-box"
                 key={i}
-                href={`/series-issues/${series.id}`}
+                href={`/series-issues/${series.id}page${1}`}
               >
                 <div className="text-2xl">{dateFirst(series.series)}</div>
                 <div className="pl-4">{series.issue_count} issues</div>

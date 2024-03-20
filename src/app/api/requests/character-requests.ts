@@ -31,7 +31,6 @@ export async function getCharacter(id: number) {
 export async function getPaginatedCharacterIssueList(urlParams: string) {
   const page = urlParams.split('page').pop()
   const id = urlParams.substring(0, urlParams.indexOf('page'))
-  console.log(`getPaginatedCharacterIssueList page: ${page}, id: ${id}`)
   const url = `${process.env.METRON_API_BASE_URL}/character/${id}/issue_list/?page=${page}`
 
   console.log(`url = ${url}`)

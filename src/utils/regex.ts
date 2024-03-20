@@ -25,10 +25,6 @@ export const formattedName = (string: string): string => {
 export const paginationId = (string: string): string => {
   const newString = string
     .substring(0, string.indexOf('page'))
-    .split('character/')
-    .pop()
-  // console.log(`paginationId input: ${string}`)
-  // console.log(`paginationId outout: ${newString}`)
   return newString ? newString : ''
 }
 
@@ -37,7 +33,5 @@ export const paginationId = (string: string): string => {
  */
 export const paginationPageNumber = (string: string): number => {
   const nextPageNumber = Number(string.split('?page=').pop())
-  console.log(`paginationPageNumber input: ${string}`)
-  console.log(`paginationPageNumber output: ${nextPageNumber}`)
   return nextPageNumber ? nextPageNumber : 1
 }

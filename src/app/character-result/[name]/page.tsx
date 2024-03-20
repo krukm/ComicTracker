@@ -1,6 +1,5 @@
 import { getCharacterResult } from '@/app/api/requests/character-requests'
 import { CharacterResultDataWrapper } from '@/types/character/character-result'
-import { formattedName } from '@/utils/regex'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
