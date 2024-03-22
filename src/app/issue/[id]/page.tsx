@@ -65,10 +65,10 @@ export default async function Page({ params }: { params: { id: number } }) {
       {issue.variants.length > 0 ? (
         <div>
           <div className="page-subheader">Variant Covers:</div>
-          <div className="flex flex-col md:flex-row justify-start mt-2">
+          <div className="flex flex-wrap mt-2">
             {getVariantCovers().map((variant, index) => {
               return (
-                <div key={index} className="image-container">
+                <div key={index} className="image-container w-1/3">
                   <Image
                     className="image-issue"
                     key={index}

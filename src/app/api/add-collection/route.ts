@@ -1,7 +1,10 @@
-import { sql } from '@vercel/postgres'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
+import prisma from '../../../../prisma/prisma'
 
-export async function GET(request: NextRequest) {
+export const runtime = 'edge'
+
+export async function GET(request: Request) {
+  
   const { searchParams } = new URL(request.url)
   const issue_id = searchParams.get('issue_id')
   const issue_number = searchParams.get('issue_number')
@@ -10,26 +13,27 @@ export async function GET(request: NextRequest) {
   const series_name = searchParams.get('series_name')
   const series_id = searchParams.get('series_id')
 
-  try {
-    if (
-      !issue_id ||
-      !issue_number ||
-      !issue_name ||
-      !cover_date ||
-      !series_name
-    )
-      throw new Error('all params required')
-    await sql`
-              INSERT INTO collection (issue_id, issue_number, issue_name, cover_date, series_name)
-              SELECT ${issue_id}, ${issue_number}, ${issue_name}, ${cover_date}, ${series_name}
-              WHERE
-              NOT EXISTS ( SELECT issue_id FROM collection WHERE issue_id = ${issue_id} )
-              `
-  } catch (error) {
-    return NextResponse.json({ error }, { status: 500 })
+  if (
+    !issue_id ||
+    !issue_number ||
+    !issue_name ||
+    !cover_date ||
+    !series_name
+  ) {
+    throw new Error('all params required')
   }
 
+  const issue = await prisma.collection.create({
+    data: {
+        issue_id: Number(issue_id),
+        issue_number: issue_number,
+        issue_name: issue_name,
+        cover_date: cover_date,
+        series_name: series_name
+    }
+  })
+
   return NextResponse.redirect(
-    new URL(`/series-issues/${series_id}`, request.url),
+    new URL(`/my-collection/`, request.url),
   )
 }

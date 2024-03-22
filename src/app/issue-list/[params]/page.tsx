@@ -9,7 +9,6 @@ import { getPaginatedCharacterIssueList } from '@/app/api/requests/character-req
  * @returns The IssueList component.
  */
 export default async function Page({ params }: { params: { params: string } }) {
-  console.log('page params: ', params.params)
   const issueList: PaginatedIssueList = await getPaginatedCharacterIssueList(
     params.params,
   )

@@ -15,9 +15,6 @@ export async function getIssue(id: number) {
 }
 
 export async function getPageIssuesList(url: string) {
-  console.log('call: ', url)
-
-  console.log(url)
   const res = await fetch(url, {
     method: 'GET',
     headers: BASE_HEADERS,

@@ -8,7 +8,7 @@ import FilterBar from '@/components/Textbox/Filter'
 import { toYearOnly } from '@/utils/dates'
 import Button from '@/components/Button/Button'
 
-export default function Page() {
+export default async function Page() {
   const [collection, setCollection] = useState<CollectionItem[]>([])
   const [loading, setLoading] = useState(true)
   const [filtered, setFiltered] = useState(false)
@@ -64,7 +64,7 @@ export default function Page() {
     await fetch('api/get-collection')
       .then((res) => res.json())
       .then((data) => {
-        setCollection(data.data.rows)
+        setCollection(data)
       })
       .catch((error) => console.log(error))
       .finally(() => {

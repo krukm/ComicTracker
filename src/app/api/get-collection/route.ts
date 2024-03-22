@@ -1,13 +1,10 @@
-import { sql } from '@vercel/postgres'
 import { NextResponse } from 'next/server'
+import { CollectionItem } from '@/types/collection'
+import prisma from '../../../../prisma/prisma'
 
-export async function GET() {
-  let collection
+export const runtime = 'edge'
 
-  try {
-    collection = await sql`SELECT * FROM collection;`
-  } catch (error) {
-    return NextResponse.json({ error })
-  }
-  return NextResponse.json({ data: collection })
+export async function GET(request: Request) {
+  const collection: CollectionItem[] = await prisma.collection.findMany()
+  return NextResponse.json(collection, { status: 200 })
 }
