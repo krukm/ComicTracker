@@ -6,24 +6,25 @@ import { PaginatedIssueList } from '@/types/issue/paginated-issue-list'
 import { paginationId, paginationPageNumber } from '@/utils/regex'
 
 export default async function Page({ params }: { params: { params: string } }) {
-  const issueList: PaginatedIssueList = await getPaginatedSeriesIssueList(params.params)
+  const issueList: PaginatedIssueList = await getPaginatedSeriesIssueList(
+    params.params,
+  )
   const seriesId = paginationId(params.params)
 
   return (
     <div className="issue-image-list">
-        {issueList.previous ? (
-          <Link
-            href={`/series-issues/${
-              seriesId
-              }page${paginationPageNumber(issueList.previous)
-            }`}
-            className="list-item justify-center max-h-8 self-center mx-5"
-          >
-            Previous issues
-          </Link>
-        ) : (
-          <></>
-        )}
+      {issueList.previous ? (
+        <Link
+          href={`/series-issues/${seriesId}page${paginationPageNumber(
+            issueList.previous,
+          )}`}
+          className="list-item justify-center max-h-8 self-center mx-5"
+        >
+          Previous issues
+        </Link>
+      ) : (
+        <></>
+      )}
       {issueList.results.map((issue) => {
         return (
           <div className="justify-self-center p-4" key={issue.id}>
@@ -57,19 +58,18 @@ export default async function Page({ params }: { params: { params: string } }) {
           </div>
         )
       })}
-        {issueList.next ? (
-          <Link
-            href={`/series-issues/${
-              seriesId
-              }page${paginationPageNumber(issueList.next)
-            }`}
-            className="list-item justify-center max-h-8 self-center"
-          >
-            More issues
-          </Link>
-        ) : (
-          <></>
-        )}
+      {issueList.next ? (
+        <Link
+          href={`/series-issues/${seriesId}page${paginationPageNumber(
+            issueList.next,
+          )}`}
+          className="list-item justify-center max-h-8 self-center"
+        >
+          More issues
+        </Link>
+      ) : (
+        <></>
+      )}
     </div>
   )
 }

@@ -8,7 +8,7 @@ import FilterBar from '@/components/Textbox/Filter'
 import { toYearOnly } from '@/utils/dates'
 import Button from '@/components/Button/Button'
 
-export default async function Page() {
+export default function Page() {
   const [collection, setCollection] = useState<CollectionItem[]>([])
   const [loading, setLoading] = useState(true)
   const [filtered, setFiltered] = useState(false)

@@ -1,5 +1,6 @@
 import { getCharacterResult } from '@/app/api/requests/character-requests'
 import { CharacterResultDataWrapper } from '@/types/character/character-result'
+import { formattedName } from '@/utils/regex'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
@@ -14,7 +15,7 @@ export default async function Page({ params }: { params: { name: string } }) {
 
   return (
     <div className="page">
-      <div className="page-subheader">Which {params.name}?</div>
+      <div className="page-subheader">Which {formattedName(params.name)}?</div>
       {characterList.results.map((character, i) => {
         return (
           <Link
