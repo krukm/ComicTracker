@@ -12,7 +12,8 @@ export async function getSeries(name: string) {
   if (!res.ok) {
     throw new Error(`unable to fetch series - ${res.statusText}`)
   }
-  return res.json()
+  let data = await res.json()
+  return data
 }
 
 export async function getPaginatedSeriesIssueList(id: string, page: string) {
@@ -26,5 +27,6 @@ export async function getPaginatedSeriesIssueList(id: string, page: string) {
   if (!res.ok) {
     throw new Error(`unable to fetch series issues - ${res.statusText}`)
   }
-  return res.json()
+  let data = await res.json()
+  return data
 }

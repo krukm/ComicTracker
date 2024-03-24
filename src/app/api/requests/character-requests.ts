@@ -11,7 +11,8 @@ export async function getCharacterResult(name: string) {
   if (!res.ok) {
     throw new Error(`unable to find character - ${res.statusText}`)
   }
-  return res.json()
+  let data = await res.json()
+  return data
 }
 
 export async function getCharacter(id: number) {
@@ -25,7 +26,8 @@ export async function getCharacter(id: number) {
   if (!res.ok) {
     throw new Error(`unable to find character - ${res.statusText}`)
   }
-  return res.json()
+  let data = await res.json()
+  return data
 }
 
 export async function getPaginatedCharacterIssueList(id: string, page: string) {
@@ -40,5 +42,6 @@ export async function getPaginatedCharacterIssueList(id: string, page: string) {
     throw new Error(`unable to find issues - ${res.statusText}`)
   }
 
-  return res.json()
+  let data = await res.json()
+  return data
 }

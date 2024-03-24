@@ -11,7 +11,8 @@ export async function getIssue(id: number) {
   if (!res.ok) {
     throw new Error('unable to fetch issue')
   }
-  return res.json()
+  let data = await res.json()
+  return data
 }
 
 export async function getPageIssuesList(url: string) {
@@ -24,5 +25,6 @@ export async function getPageIssuesList(url: string) {
     throw new Error(`unable to find issues - ${res.statusText}`)
   }
 
-  return res.json()
+  let data = await res.json()
+  return data
 }

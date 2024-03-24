@@ -26,7 +26,8 @@ export async function getTeamInfo(id: number) {
     throw new Error(`unable to find team - ${res.statusText}`)
   }
 
-  return res.json()
+  let data = await res.json()
+  return data
 }
 
 export async function getTeamIssues(id: number) {
@@ -40,5 +41,6 @@ export async function getTeamIssues(id: number) {
   if (!res.ok) {
     throw new Error(`unable to find team issues - ${res.statusText}`)
   }
-  return res.json()
+  let data = await res.json()
+  return data
 }

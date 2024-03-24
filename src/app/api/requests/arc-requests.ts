@@ -25,7 +25,8 @@ export async function getArc(id: number) {
   if (!res.ok) {
     throw new Error(`unable to find story arc - ${res.statusText}`)
   }
-  return res.json()
+  let data = await res.json()
+  return data
 }
 
 export async function getArcIssues(id: number) {
@@ -40,5 +41,6 @@ export async function getArcIssues(id: number) {
     throw new Error(`unable to find story arc issues - ${res.statusText}`)
   }
 
-  return res.json()
+  let data = await res.json()
+  return data
 }
