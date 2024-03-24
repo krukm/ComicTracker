@@ -3,19 +3,24 @@ import Image from 'next/image'
 import { toUSDate } from '@/utils/dates'
 import { getPaginatedSeriesIssueList } from '@/app/api/requests/series-requests'
 import { PaginatedIssueList } from '@/types/issue/paginated-issue-list'
-import { paginationId, paginationPageNumber } from '@/utils/regex'
+import { paginationPageNumber } from '@/utils/regex'
 
-export default async function Page({ params }: { params: { params: string } }) {
+export default async function SeriesIssues({
+  params,
+}: {
+  params: { slug: string[] }
+}) {
   const issueList: PaginatedIssueList = await getPaginatedSeriesIssueList(
-    params.params,
+    params.slug[0],
+    params.slug[1],
   )
-  const seriesId = paginationId(params.params)
+  // const seriesId = paginationId(params.params)
 
   return (
     <div className="issue-image-list">
       {issueList.previous ? (
         <Link
-          href={`/series-issues/${seriesId}page${paginationPageNumber(
+          href={`/series-issues/${params.slug[0]}/${paginationPageNumber(
             issueList.previous,
           )}`}
           className="list-item justify-center max-h-8 self-center mx-5"
@@ -50,7 +55,7 @@ export default async function Page({ params }: { params: { params: string } }) {
                 issue.number
               }&issue_name=${issue.issue.replace('#', '%23')}&cover_date=${
                 issue.cover_date
-              }&series_name=${issue.series.name}&series_id=${seriesId}`}
+              }&series_name=${issue.series.name}&series_id=${params.slug[0]}`}
             >
               <div className="sm-button-text">add</div>
               <div className="lg-button-text">add to collection</div>
@@ -60,7 +65,7 @@ export default async function Page({ params }: { params: { params: string } }) {
       })}
       {issueList.next ? (
         <Link
-          href={`/series-issues/${seriesId}page${paginationPageNumber(
+          href={`/series-issues/${params.slug[0]}/${paginationPageNumber(
             issueList.next,
           )}`}
           className="list-item justify-center max-h-8 self-center"

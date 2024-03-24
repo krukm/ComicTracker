@@ -28,9 +28,7 @@ export async function getCharacter(id: number) {
   return res.json()
 }
 
-export async function getPaginatedCharacterIssueList(urlParams: string) {
-  const page = urlParams.split('page').pop()
-  const id = urlParams.substring(0, urlParams.indexOf('page'))
+export async function getPaginatedCharacterIssueList(id: string, page: string) {
   const url = `${process.env.METRON_API_BASE_URL}/character/${id}/issue_list/?page=${page}`
 
   const res = await fetch(url, {

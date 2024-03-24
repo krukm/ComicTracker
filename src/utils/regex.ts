@@ -20,14 +20,6 @@ export const formattedName = (string: string): string => {
 }
 
 /**
- * Function to get id for pagination.
- */
-export const paginationId = (string: string): string => {
-  const newString = string.substring(0, string.indexOf('page'))
-  return newString ? newString : ''
-}
-
-/**
  * Function to extract the next page number from a paginated url.
  */
 export const paginationPageNumber = (string: string): number => {

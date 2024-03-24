@@ -25,6 +25,7 @@ export default function SearchBar() {
           : (route = `/team-list/${term}`)
 
     router.push(route)
+    router.refresh()
   }
 
   const handleKeyDown = (e: { key: string }) => {
@@ -143,8 +144,20 @@ export default function SearchBar() {
         </div>
       </div>
       <div>
-        <div className="page-subheading">Recent searches:</div>
-        <div>
+        <div className="flex justify-between items-end">
+          <div className="page-subheading">Recent searches:</div>
+          <Button
+            className="list-item"
+            onClick={() => {
+              console.log('clear')
+              localStorage.clear()
+              location.reload()
+            }}
+          >
+            Clear
+          </Button>
+        </div>
+        <div className="mt-3 pt-3 border-solid border-t-2">
           {history.map((searchItem: string, index: number) => {
             const type = searchItem.toString().split('::')[0]
             const term = searchItem.toString().split('::')[1]
@@ -161,7 +174,7 @@ export default function SearchBar() {
                     : ''
 
             return (
-              <div key={index} className="list-item">
+              <div key={index} className="list-item mb-1">
                 <Link href={redirect}>
                   {term} -- from {type}
                 </Link>

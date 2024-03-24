@@ -3,7 +3,7 @@ import { SeriesDataWrapper } from '@/types/series/series'
 import { dateFirst, formattedName } from '@/utils/regex'
 import Link from 'next/link'
 
-export default async function Page({ params }: { params: { name: string } }) {
+export default async function Series({ params }: { params: { name: string } }) {
   const series: SeriesDataWrapper = await getSeries(params.name)
 
   return (
@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: { name: string } }) {
               <Link
                 className="comic-box"
                 key={i}
-                href={`/series-issues/${series.id}page${1}`}
+                href={`/series-issues/${series.id}/${1}`}
               >
                 <div className="text-2xl">{dateFirst(series.series)}</div>
                 <div className="pl-4">{series.issue_count} issues</div>

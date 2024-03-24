@@ -1,16 +1,21 @@
 import { toYearOnly } from '@/utils/dates'
 import Link from 'next/link'
 import { PaginatedIssueList } from '@/types/issue/paginated-issue-list'
-import { paginationPageNumber, paginationId } from '@/utils/regex'
+import { paginationPageNumber } from '@/utils/regex'
 import { getPaginatedCharacterIssueList } from '@/app/api/requests/character-requests'
 
 /**
  * Function to produce the IssueList component.
  * @returns The IssueList component.
  */
-export default async function Page({ params }: { params: { params: string } }) {
+export default async function IssueList({
+  params,
+}: {
+  params: { slug: string[] }
+}) {
   const issueList: PaginatedIssueList = await getPaginatedCharacterIssueList(
-    params.params,
+    params.slug[0],
+    params.slug[1],
   )
 
   return (
@@ -18,9 +23,9 @@ export default async function Page({ params }: { params: { params: string } }) {
       <div className="issue-list">
         {issueList.previous ? (
           <Link
-            href={`/issue-list/${paginationId(
-              params.params,
-            )}page${paginationPageNumber(issueList.previous)}`}
+            href={`/issue-list/${params.slug[0]}/${paginationPageNumber(
+              issueList.previous,
+            )}`}
             className="list-item justify-center"
           >
             Previous issues
@@ -41,9 +46,9 @@ export default async function Page({ params }: { params: { params: string } }) {
         })}
         {issueList.next ? (
           <Link
-            href={`/issue-list/${paginationId(
-              params.params,
-            )}page${paginationPageNumber(issueList.next)}`}
+            href={`/issue-list/${params.slug[0]}/${paginationPageNumber(
+              issueList.next,
+            )}`}
             className="list-item justify-center"
           >
             More issues

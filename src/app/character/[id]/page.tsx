@@ -5,7 +5,6 @@ import Link from 'next/link'
 
 export default async function Page({ params }: { params: { id: number } }) {
   const character: CharacterInfo = await getCharacter(params.id)
-  const urlParams = `${params.id}page1`
 
   return (
     <div className="page">
@@ -29,7 +28,7 @@ export default async function Page({ params }: { params: { id: number } }) {
           <></>
         )}
       </div>
-      <Link href={`/issue-list/${urlParams}`} className="list-item mt-4">
+      <Link href={`/issue-list/${params.id}/1`} className="list-item mt-4">
         List of Issues featuring {character.name}
       </Link>
       <div className="character-container">
