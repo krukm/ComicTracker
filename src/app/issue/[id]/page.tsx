@@ -4,7 +4,7 @@ import { toUSDate } from '../../../../utils/dates'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default async function Page({ params }: { params: { id: number } }) {
+export default async function Issue({ params }: { params: { id: number } }) {
   const issue: IssueInfo = await getIssue(params.id)
 
   const getVariantCovers = (): string[] => {

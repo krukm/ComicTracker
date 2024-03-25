@@ -5,7 +5,7 @@ import { toUSDate } from '../../../../utils/dates'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default async function Page({ params }: { params: { id: number } }) {
+export default async function Team({ params }: { params: { id: number } }) {
   const teamInfo: TeamInfo = await getTeamInfo(params.id)
   const teamIssues: ListIssueDataWrapper = await getTeamIssues(params.id)
 

@@ -4,7 +4,7 @@ import { formattedName } from '../../../../utils/regex'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
-export default async function Page({ params }: { params: { name: string } }) {
+export default async function CharacterResult({ params }: { params: { name: string } }) {
   const characterList: CharacterResultDataWrapper = await getCharacterResult(
     params.name,
   )
@@ -12,7 +12,7 @@ export default async function Page({ params }: { params: { name: string } }) {
   if (characterList.results.length === 1) {
     redirect(`/character/${characterList.results[0].id}`)
   } else if (characterList.results.length === 0) {
-    redirect("/")
+    redirect('/')
   }
 
   return (

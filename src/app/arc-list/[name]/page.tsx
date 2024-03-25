@@ -4,7 +4,7 @@ import { formattedName } from '../../../../utils/regex'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
-export default async function Page({ params }: { params: { name: string } }) {
+export default async function ArcList({ params }: { params: { name: string } }) {
   const arcs: ArcResultDataWrapper = await getArcs(params.name)
 
   if (arcs.results.length === 1) {

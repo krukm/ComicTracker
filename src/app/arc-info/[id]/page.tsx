@@ -4,7 +4,7 @@ import { ListIssueDataWrapper } from '../../../../types/issue/list-issue'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default async function Page({ params }: { params: { id: number } }) {
+export default async function AcrInfo({ params }: { params: { id: number } }) {
   const arc: ArcInfo = await getArc(params.id)
   const arcIssues: ListIssueDataWrapper = await getArcIssues(params.id)
 

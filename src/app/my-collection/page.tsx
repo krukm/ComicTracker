@@ -6,9 +6,8 @@ import { useEffect, useState } from 'react'
 import Loading from '../loading'
 import FilterBar from '../../components/Textbox/Filter'
 import { toYearOnly } from '../../../utils/dates'
-import Button from '../../components/Button/Button'
 
-export default function Page() {
+export default function MyCollection() {
   const [collection, setCollection] = useState<CollectionItem[]>([])
   const [loading, setLoading] = useState(true)
   const [filtered, setFiltered] = useState(false)
@@ -61,7 +60,7 @@ export default function Page() {
   }
 
   const getCollectionData = async () => {
-    await fetch('api/get-collection')
+    await fetch('api/get-collection', { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
         setCollection(data)
@@ -80,16 +79,10 @@ export default function Page() {
         collectionSize={collection.length}
         seriesSize={seriesSize}
       />
-      <Button
-        onClick={() => location.reload()}
-        className="mt-10 px-1 bg-slate-300 rounded-md border-2 border-slate-500"
-      >
-        Refresh
-      </Button>
       {loading ? (
         <Loading />
       ) : (
-        <div className="pt-15">
+        <div className="pt-24">
           {Object.entries(filtered ? filteredArray : orderedCollection)
             .sort()
             .map(([key, value], index) => {
@@ -104,7 +97,9 @@ export default function Page() {
                   {value
                     .sort((a, b) => {
                       return (
-                        (+a.issue_number || 0) - (+b.issue_number || 0) || 0
+                        (+a.issue_number || 0) - (+b.issue_number || 0) ||
+                        Number(toYearOnly(a.cover_date)) -
+                          Number(toYearOnly(b.cover_date))
                       )
                     })
                     .map((issue) => {
@@ -124,6 +119,7 @@ export default function Page() {
                             <Link
                               href={`/api/delete-collection?issue_id=${issue.issue_id}`}
                               className="px-1 rounded-md text-red-800 bg-slate-300 border-2 border-slate-500"
+                              onClick={() => location.reload()}
                             >
                               Remove
                             </Link>
