@@ -4,7 +4,11 @@ import { formattedName } from '../../../../utils/regex'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
-export default async function CharacterResult({ params }: { params: { name: string } }) {
+export default async function CharacterResult({
+  params,
+}: {
+  params: { name: string }
+}) {
   const characterList: CharacterResultDataWrapper = await getCharacterResult(
     params.name,
   )

@@ -9,7 +9,7 @@ export async function getIssue(id: number) {
   })
 
   if (!res.ok) {
-    throw new Error('unable to fetch issue')
+    throw new Error(`unable to fetch issue: ${id} - ${res.statusText}`)
   }
   let data = await res.json()
   return data
@@ -22,7 +22,7 @@ export async function getPageIssuesList(url: string) {
   })
 
   if (!res.ok) {
-    throw new Error(`unable to find issues - ${res.statusText}`)
+    throw new Error(`unable to find issues from: ${url} - ${res.statusText}`)
   }
 
   let data = await res.json()

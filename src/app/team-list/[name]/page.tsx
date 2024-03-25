@@ -3,7 +3,11 @@ import { ListTeamDataWrapper } from '../../../../types/team/list-team'
 import { formattedName } from '../../../../utils/regex'
 import Link from 'next/link'
 
-export default async function TeamList({ params }: { params: { name: string } }) {
+export default async function TeamList({
+  params,
+}: {
+  params: { name: string }
+}) {
   const teamList: ListTeamDataWrapper = await getTeamList(params.name)
 
   return (

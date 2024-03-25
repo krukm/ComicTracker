@@ -3,7 +3,11 @@ import { CharacterInfo } from '../../../../types/character/character-info'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default async function Character({ params }: { params: { id: number } }) {
+export default async function Character({
+  params,
+}: {
+  params: { id: number }
+}) {
   const character: CharacterInfo = await getCharacter(params.id)
 
   return (
