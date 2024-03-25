@@ -1,6 +1,6 @@
-import { getArcs } from '@/api/requests/arc-requests'
-import { ArcResultDataWrapper } from '@/types/arc/arc-result'
-import { formattedName } from '@/utils/regex'
+import { getArcs } from '../../api/requests/arc-requests'
+import { ArcResultDataWrapper } from '../../../../types/arc/arc-result'
+import { formattedName } from '../../../../utils/regex'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 

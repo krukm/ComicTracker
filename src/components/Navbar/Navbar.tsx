@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { FaBars, FaTimes } from 'react-icons/fa'
-import { rubikGlitch } from './../../utils/fonts'
+import { rubikGlitch } from '../../../utils/fonts'
 
 export default function Navbar() {
   const [nav, setNav] = useState(false)

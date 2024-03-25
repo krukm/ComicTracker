@@ -1,8 +1,8 @@
-import { toYearOnly } from '@/utils/dates'
+import { toYearOnly } from '../../../../utils/dates'
 import Link from 'next/link'
-import { PaginatedIssueList } from '@/types/issue/paginated-issue-list'
-import { paginationPageNumber } from '@/utils/regex'
-import { getPaginatedCharacterIssueList } from '@/api/requests/character-requests'
+import { PaginatedIssueList } from '../../../../types/issue/paginated-issue-list'
+import { paginationPageNumber } from '../../../../utils/regex'
+import { getPaginatedCharacterIssueList } from '../../api/requests/character-requests'
 
 /**
  * Function to produce the IssueList component.

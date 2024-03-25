@@ -1,12 +1,12 @@
 'use client'
 
-import { CollectionItem } from '@/types/collection'
+import { CollectionItem } from '../../../types/collection'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Loading from '../loading'
-import FilterBar from '@/components/Textbox/Filter'
-import { toYearOnly } from '@/utils/dates'
-import Button from '@/components/Button/Button'
+import FilterBar from '../../components/Textbox/Filter'
+import { toYearOnly } from '../../../utils/dates'
+import Button from '../../components/Button/Button'
 
 export default function Page() {
   const [collection, setCollection] = useState<CollectionItem[]>([])

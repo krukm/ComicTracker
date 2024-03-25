@@ -1,7 +1,7 @@
-import { getTeamInfo, getTeamIssues } from '@/api/requests/team-requests'
-import { ListIssueDataWrapper } from '@/types/issue/list-issue'
-import { TeamInfo } from '@/types/team/team-info'
-import { toUSDate } from '@/utils/dates'
+import { getTeamInfo, getTeamIssues } from '../../api/requests/team-requests'
+import { ListIssueDataWrapper } from '../../../../types/issue/list-issue'
+import { TeamInfo } from '../../../../types/team/team-info'
+import { toUSDate } from '../../../../utils/dates'
 import Image from 'next/image'
 import Link from 'next/link'
 

@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import Button from '../Button/Button'
-import { useLocalStorage } from '@/utils/hooks/use-local-storage'
+import { useLocalStorage } from '../../../utils/hooks/use-local-storage'
 import Link from 'next/link'
 
 export default function SearchBar() {
@@ -149,7 +149,6 @@ export default function SearchBar() {
           <Button
             className="list-item"
             onClick={() => {
-              console.log('clear')
               localStorage.clear()
               location.reload()
             }}

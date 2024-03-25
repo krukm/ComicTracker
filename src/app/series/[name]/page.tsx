@@ -1,6 +1,6 @@
-import { getSeries } from '@/api/requests/series-requests'
-import { SeriesDataWrapper } from '@/types/series/series'
-import { dateFirst, formattedName } from '@/utils/regex'
+import { getSeries } from '../../api/requests/series-requests'
+import { SeriesDataWrapper } from '../../../../types/series/series'
+import { dateFirst, formattedName } from '../../../../utils/regex'
 import Link from 'next/link'
 
 export default async function Series({ params }: { params: { name: string } }) {

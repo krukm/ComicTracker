@@ -1,5 +1,5 @@
-import { getCharacter } from '@/api/requests/character-requests'
-import { CharacterInfo } from '@/types/character/character-info'
+import { getCharacter } from '../../api/requests/character-requests'
+import { CharacterInfo } from '../../../../types/character/character-info'
 import Image from 'next/image'
 import Link from 'next/link'
 

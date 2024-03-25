@@ -1,4 +1,4 @@
-import { BASE_HEADERS } from '@/utils/constants'
+import { BASE_HEADERS } from '../../../../utils/constants'
 
 export async function getCharacterResult(name: string) {
   const url = `${process.env.METRON_API_BASE_URL}/character/?name=${name}`

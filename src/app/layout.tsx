@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import { scriptFont } from './../utils/fonts'
-import NavBar from '@/components/Navbar/Navbar'
+import { scriptFont } from '../../utils/fonts'
+import NavBar from '../components/Navbar/Navbar'
 import './globals.css'
 
 export const metadata: Metadata = {

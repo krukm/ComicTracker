@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { toUSDate } from '@/utils/dates'
-import { getPaginatedSeriesIssueList } from '@/api/requests/series-requests'
-import { PaginatedIssueList } from '@/types/issue/paginated-issue-list'
-import { paginationPageNumber } from '@/utils/regex'
+import { toUSDate } from '../../../../utils/dates'
+import { getPaginatedSeriesIssueList } from '../../api/requests/series-requests'
+import { PaginatedIssueList } from '../../../../types/issue/paginated-issue-list'
+import { paginationPageNumber } from '../../../../utils/regex'
 
 export default async function SeriesIssues({
   params,

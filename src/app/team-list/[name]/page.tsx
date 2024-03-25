@@ -1,6 +1,6 @@
-import { getTeamList } from '@/api/requests/team-requests'
-import { ListTeamDataWrapper } from '@/types/team/list-team'
-import { formattedName } from '@/utils/regex'
+import { getTeamList } from '../../api/requests/team-requests'
+import { ListTeamDataWrapper } from '../../../../types/team/list-team'
+import { formattedName } from '../../../../utils/regex'
 import Link from 'next/link'
 
 export default async function Page({ params }: { params: { name: string } }) {

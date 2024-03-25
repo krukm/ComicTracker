@@ -1,4 +1,4 @@
-import { BASE_HEADERS } from '@/utils/constants'
+import { BASE_HEADERS } from '../../../../utils/constants'
 
 export async function getSeries(name: string) {
   const res = await fetch(
@@ -10,7 +10,7 @@ export async function getSeries(name: string) {
   )
 
   if (!res.ok) {
-    throw new Error(`unable to fetch series - ${res.statusText}`)
+    throw new Error(`fetch series- ${res.statusText}`)
   }
   let data = await res.json()
   return data
