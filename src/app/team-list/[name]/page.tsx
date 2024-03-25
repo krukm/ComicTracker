@@ -1,4 +1,4 @@
-import { getTeamList } from '@/app/api/requests/team-requests'
+import { getTeamList } from '@/api/requests/team-requests'
 import { ListTeamDataWrapper } from '@/types/team/list-team'
 import { formattedName } from '@/utils/regex'
 import Link from 'next/link'

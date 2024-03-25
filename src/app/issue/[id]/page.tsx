@@ -1,4 +1,4 @@
-import { getIssue } from '@/app/api/requests/issue-requests'
+import { getIssue } from '@/api/requests/issue-requests'
 import { IssueInfo } from '@/types/issue/issue-info'
 import { toUSDate } from '@/utils/dates'
 import Image from 'next/image'

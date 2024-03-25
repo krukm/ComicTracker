@@ -1,4 +1,4 @@
-import { getArc, getArcIssues } from '@/app/api/requests/arc-requests'
+import { getArc, getArcIssues } from '@/api/requests/arc-requests'
 import { ArcInfo } from '@/types/arc/arc-info'
 import { ListIssueDataWrapper } from '@/types/issue/list-issue'
 import Image from 'next/image'

@@ -1,4 +1,4 @@
-import { getSeries } from '@/app/api/requests/series-requests'
+import { getSeries } from '@/api/requests/series-requests'
 import { SeriesDataWrapper } from '@/types/series/series'
 import { dateFirst, formattedName } from '@/utils/regex'
 import Link from 'next/link'
