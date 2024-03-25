@@ -60,7 +60,7 @@ export default function MyCollection() {
   }
 
   const getCollectionData = async () => {
-    await fetch('api/get-collection', { cache: 'no-store' })
+    await fetch('api/get-collection')
       .then((res) => res.json())
       .then((data) => {
         setCollection(data)
