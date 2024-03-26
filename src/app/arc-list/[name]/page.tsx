@@ -12,7 +12,13 @@ export default async function ArcList({
   const arcs: ArcResultDataWrapper = await getArcs(params.name)
 
   if (arcs.results.length === 1) {
-    redirect(`/arc-info/${arcs.results[0].id}`)
+    redirect(`/arc-info/arc/${arcs.results[0].id}/1`)
+  } else if (arcs.results.length === 0) {
+    return (
+      <div className="p-12 text-2xl">
+        Sorry, no arc named {formattedName(params.name)} found.
+      </div>
+    )
   }
 
   return (
@@ -21,17 +27,23 @@ export default async function ArcList({
         Story Arcs for {formattedName(params.name)}
       </div>
       <div className="flex flex-col self-center pt-4">
-        {arcs.results.map((arc, index) => {
-          return (
-            <Link
-              key={index}
-              href={`/arc-info/${arc.id}`}
-              className="comic-box"
-            >
-              {arc.name}
-            </Link>
-          )
-        })}
+        {arcs.results.length > 0 ? (
+          arcs.results.map((arc, index) => {
+            return (
+              <Link
+                key={index}
+                href={`/arc-info/arc/${arc.id}/1`}
+                className="comic-box"
+              >
+                {arc.name}
+              </Link>
+            )
+          })
+        ) : (
+          <div className="pt-20 text-2xl">
+            Sorry nothing found for {formattedName(params.name)}
+          </div>
+        )}
       </div>
     </div>
   )

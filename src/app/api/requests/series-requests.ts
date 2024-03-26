@@ -10,14 +10,14 @@ export async function getSeries(name: string) {
   )
 
   if (!res.ok) {
-    throw new Error(`fetch series- ${res.statusText}`)
+    throw new Error(`fetch series for ${name}: ${res.statusText}`)
   }
   let data = await res.json()
   return data
 }
 
-export async function getPaginatedSeriesIssueList(id: string, page: string) {
-  const url = `${process.env.METRON_API_BASE_URL}/series/${id}/issue_list/?page=${page}`
+export async function getSeriesInfo(id: string) {
+  const url = `${process.env.METRON_API_BASE_URL}/series/${id}/`
 
   const res = await fetch(url, {
     method: 'GET',
@@ -25,7 +25,7 @@ export async function getPaginatedSeriesIssueList(id: string, page: string) {
   })
 
   if (!res.ok) {
-    throw new Error(`unable to fetch series issues - ${res.statusText}`)
+    throw new Error(`fetching issues for ${id}: ${res.statusText}`)
   }
   let data = await res.json()
   return data

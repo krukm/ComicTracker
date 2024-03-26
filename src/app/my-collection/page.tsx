@@ -82,7 +82,7 @@ export default function MyCollection() {
       {loading ? (
         <Loading />
       ) : (
-        <div className="pt-24">
+        <div className="pt-16">
           {Object.entries(filtered ? filteredArray : orderedCollection)
             .sort()
             .map(([key, value], index) => {

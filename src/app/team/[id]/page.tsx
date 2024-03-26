@@ -1,13 +1,19 @@
-import { getTeamInfo, getTeamIssues } from '../../api/requests/team-requests'
-import { ListIssueDataWrapper } from '../../../../types/issue/list-issue'
+import { getTeamInfo } from '../../api/requests/team-requests'
 import { TeamInfo } from '../../../../types/team/team-info'
-import { toUSDate } from '../../../../utils/dates'
+import { toUSDate, toYearOnly } from '../../../../utils/dates'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getPaginatedIssueList } from '@/app/api/requests/pagination-requests'
+import { PaginatedIssueList } from '../../../../types/issue/paginated-issue-list'
+import { paginationPageNumber } from '../../../../utils/regex'
 
 export default async function Team({ params }: { params: { id: number } }) {
   const teamInfo: TeamInfo = await getTeamInfo(params.id)
-  const teamIssues: ListIssueDataWrapper = await getTeamIssues(params.id)
+  const issueList: PaginatedIssueList = await getPaginatedIssueList(
+    'team',
+    String(params.id),
+    '1',
+  )
 
   return (
     <div className="page">
@@ -25,20 +31,72 @@ export default async function Team({ params }: { params: { id: number } }) {
       </div>
       <div>
         <div className="issue-list-container">
-          <div className="page-subheading">Appearing in these issues:</div>
-          <div className="issue-list">
-            {teamIssues.results.map((issue, index) => {
+          <div className="text-3xl">
+            {teamInfo.name} appears in these issues:
+          </div>
+          <div className="issue-image-list">
+            {issueList.previous ? (
+              <Link
+                href={`/issue-list/${'team'}/${
+                  params.id
+                }/${paginationPageNumber(issueList.previous)}`}
+                className="list-item justify-center self-center"
+              >
+                More issues
+              </Link>
+            ) : (
+              <></>
+            )}
+            {issueList.results.map((issue) => {
               return (
-                <Link
-                  href={`/issue/${issue.id}`}
-                  key={index}
-                  className="list-item"
-                >
-                  {issue.series.name} Vol {issue.series.volume} #{issue.number}{' '}
-                  ({toUSDate(issue.cover_date)})
-                </Link>
+                <div className="justify-self-center p-4" key={issue.id}>
+                  <Link href={`/issue/${issue.id}`}>
+                    <Image
+                      className="image-issue"
+                      src={issue.image ? issue.image : ''}
+                      alt={
+                        issue.image
+                          ? `image of ${issue.series.name} number ${issue.number}`
+                          : ''
+                      }
+                      height={500}
+                      width={300}
+                    />
+                  </Link>
+                  <div className="text-center">
+                    #{issue.number} ({toYearOnly(issue.cover_date)})
+                  </div>
+                  <Link
+                    className="list-item"
+                    href={`/api/add-collection?issue_id=${
+                      issue.id
+                    }&issue_number=${
+                      issue.number
+                    }&issue_name=${issue.issue.replace(
+                      '#',
+                      '%23',
+                    )}&cover_date=${issue.cover_date}&series_name=${
+                      issue.series.name
+                    }&series_id=${params.id}`}
+                  >
+                    <div className="sm-button-text">add</div>
+                    <div className="lg-button-text">add to collection</div>
+                  </Link>
+                </div>
               )
             })}
+            {issueList.next ? (
+              <Link
+                href={`/issue-list/${'team'}/${
+                  params.id
+                }/${paginationPageNumber(issueList.next)}`}
+                className="list-item justify-center self-center"
+              >
+                More issues
+              </Link>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

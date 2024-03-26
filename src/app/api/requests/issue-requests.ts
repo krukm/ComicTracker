@@ -14,17 +14,3 @@ export async function getIssue(id: number) {
   let data = await res.json()
   return data
 }
-
-export async function getPageIssuesList(url: string) {
-  const res = await fetch(url, {
-    method: 'GET',
-    headers: BASE_HEADERS,
-  })
-
-  if (!res.ok) {
-    throw new Error(`unable to find issues from: ${url} - ${res.statusText}`)
-  }
-
-  let data = await res.json()
-  return data
-}

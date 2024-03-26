@@ -12,7 +12,7 @@
 }
 
 .page-subheader {
-  @apply p-2 text-4xl;
+  @apply p-6 text-3xl text-center;
 }
 
 .comic-box {
@@ -55,6 +55,10 @@
 
 .list-item {
   @apply flex px-2 rounded-md border-2 border-slate-500 bg-slate-300 hover:bg-slate-500 hover:text-gray-200;
+}
+
+.issue-back-button {
+  @apply m-2 p-2 bg-slate-300 border-2 border-slate-800 rounded-lg text-center;
 }
 
 /* Character */

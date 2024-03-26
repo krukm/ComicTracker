@@ -21,7 +21,9 @@ export default async function Issue({ params }: { params: { id: number } }) {
     <div className="page">
       <div className="page-header">
         <div>
-          {issue.series.name} #{issue.number}
+          <Link href={`/series-issues/series/${issue.series.id}/1`}>
+            {issue.series.name} #{issue.number}
+          </Link>
         </div>
         <div className="flex self-center text-sm md:text-lg">
           {toUSDate(issue.cover_date)}

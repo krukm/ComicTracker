@@ -4,8 +4,11 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { rubikGlitch } from '../../../utils/fonts'
+import Button from '../Button/Button'
+import { useRouter } from 'next/navigation'
 
 export default function Navbar() {
+  const router = useRouter()
   const [nav, setNav] = useState(false)
 
   const links = [
@@ -25,8 +28,11 @@ export default function Navbar() {
     <div
       className={`${rubikGlitch.className} flex justify-between items-center w-full h-20 px-4 z-50 border-b-2 border-yellow-700 text-blue-900 bg-yellow-600 shadow-lg shadow-yellow-800 fixed nav`}
     >
-      <div>
-        <h1 className="text-3xl md:text-5xl ml-2">Comic Collector</h1>
+      <div className="flex">
+        <Button className=" text-4xl" onClick={() => router.back()}>
+          &#60;
+        </Button>
+        <h1 className="text-4xl text-center md:text-5xl">Comic Collector</h1>
       </div>
 
       <ul className="hidden md:flex">

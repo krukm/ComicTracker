@@ -14,9 +14,13 @@ export default async function CharacterResult({
   )
 
   if (characterList.results.length === 1) {
-    redirect(`/character/${characterList.results[0].id}`)
+    redirect(`/character/character/${characterList.results[0].id}/1`)
   } else if (characterList.results.length === 0) {
-    redirect('/')
+    return (
+      <div className="p-12 text-2xl">
+        Sorry, no character named {formattedName(params.name)} found.
+      </div>
+    )
   }
 
   return (
@@ -27,7 +31,7 @@ export default async function CharacterResult({
           <Link
             className="comic-box"
             key={i}
-            href={`/character/${character.id}`}
+            href={`/character/character/${character.id}/1`}
           >
             {character.name}
           </Link>

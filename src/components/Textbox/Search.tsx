@@ -77,7 +77,7 @@ export default function SearchBar() {
           value={term}
         />
         <Button
-          className="text-gray-900 absolute end-2.5 bottom-2.5 bg-white hover:bg-yellow-500 focus:outline-none focus:ring-gray-300 rounded-lg text-sm px-4 py-2"
+          className="text-gray-900 absolute end-2.5 bottom-1.5 bg-white hover:bg-yellow-500 focus:outline-none focus:ring-gray-300 rounded-lg text-sm px-4 py-2"
           type="button"
           onClick={handleSubmit}
         >
