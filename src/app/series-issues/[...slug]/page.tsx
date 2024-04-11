@@ -4,8 +4,6 @@ import { toYearOnly } from '../../../../utils/dates'
 import { PaginatedIssueList } from '../../../../types/issue/paginated-issue-list'
 import { paginationPageNumber } from '../../../../utils/regex'
 import { getPaginatedIssueList } from '@/app/api/requests/pagination-requests'
-import { getSeriesInfo } from '@/app/api/requests/series-requests'
-import { Series } from '../../../../types/series/series'
 
 export default async function SeriesIssues({
   params,
@@ -20,7 +18,7 @@ export default async function SeriesIssues({
 
   return (
     <div className="page">
-      <div className="page-header flex flex-col md:flex-row">
+      <div className="page-header flex flex-col">
         <div className="">{issueList.results[0].series.name}</div>
         <div className="text-xl">Issue count: {issueList.count}</div>
         <div className=" text-xl">

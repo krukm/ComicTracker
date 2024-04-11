@@ -29,7 +29,7 @@ export default function Navbar() {
       className={`${rubikGlitch.className} flex justify-between items-center w-full h-20 px-4 z-50 border-b-2 border-yellow-700 text-blue-900 bg-yellow-600 shadow-lg shadow-yellow-800 fixed nav`}
     >
       <div className="flex">
-        <Button className=" text-4xl" onClick={() => router.back()}>
+        <Button className="pr-5 text-4xl" onClick={() => router.back()}>
           &#60;
         </Button>
         <h1 className="text-4xl text-center md:text-5xl">Comic Collector</h1>
